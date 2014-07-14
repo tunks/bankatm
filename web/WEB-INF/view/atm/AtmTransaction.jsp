@@ -9,15 +9,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        
-         <link rel="stylesheet" href="css/ATMcss.css" media="screen" type="text/css" />
+        <title>ATM Transaction</title>
+       
+        <link rel="stylesheet" href="css/ATMcss.css" media="screen" type="text/css" />      
+
     </head>
     <body>
-        <h1>Hello World!</h1>
         
         <div class="buttonHolder">
             <a href="#" class="button tick"></a>
         </div>
+        
+        <h1>hello world</h1>
+        
+        
     </body>
 </html>
