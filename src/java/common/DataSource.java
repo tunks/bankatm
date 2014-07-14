@@ -17,7 +17,7 @@ import com.mysql.jdbc.Driver;
  */
 public class DataSource {
     private  Connection conn = null;
-    
+    //function to establish database connections
     void connect(){
           try{
        
