@@ -27,7 +27,7 @@ public class Authenticate
            
            //creating connection with the database</b></font> 
            Connection con=DriverManager.getConnection
-                        ("jdbc:mysql://localhost:3306/bank_atm_db","bank","bank1");
+                        ("jdbc:mysql://localhost:3306/bank_atm_db","root","");
            PreparedStatement ps =con.prepareStatement
                              ("select * from user where username=? and password=?");
            ps.setString(1, cardNumber);
@@ -54,7 +54,7 @@ public class Authenticate
                  
            //creating connection with the database</b></font> 
            Connection con=DriverManager.getConnection
-                        ("jdbc:mysql://localhost:3306/bank_atm_db","bank","bank1");
+                        ("jdbc:mysql://localhost:3306/bank_atm_db","root","");
            PreparedStatement ps =con.prepareStatement
                              ("select * from user where username=? and password=?");
            ps.setString(1, username);

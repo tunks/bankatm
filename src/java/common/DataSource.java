@@ -24,7 +24,7 @@ public class DataSource {
 	   //loading driver 
            Class.forName("com.mysql.jdbc.Driver");       
            //creating connection with the database</b></font> 
-           conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank_atm_db","bank","bank1");
+           conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank_atm_db","root","");
            
         //return (cardNo.equals("user") && pinCode.equals("user") );
       }catch(Exception e)

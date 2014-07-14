@@ -9,9 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="vendor/bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">      
+        <script src="vendor/jquery/jquery-1.11.1.min.js"></script>
+        <script src="vendor/bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="javascripts/webapp.js"></script>
         <title>JSP Page</title>
     </head>
     <body>
         <h1>Welcome to the Bank Home page</h1>
+        <div>
+               <form action="logout" method="post" role="form">
+                 <button type="submit" class="btn btn-primary">Logout</button>
+               </form>
+        </div>
     </body>
 </html>
