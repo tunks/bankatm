@@ -24,7 +24,7 @@
                 <input type="password" class="form-control" id="pin-code" name="pinCode" placeholder="Pin code">
               </div>
               <div class="form-group">
-                <input type="text"  id="realPerson" name="realPerson">
+                <input type="text"  id="atmRealPerson" name="atmRealPerson">
               </div>
               <button type="submit" class="btn btn-primary btn-lg">Submit</button>
             </form>

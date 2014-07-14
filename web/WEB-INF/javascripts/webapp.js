@@ -18,5 +18,6 @@ jQuery( document ).ready(function( $ ) {
 */
 
 //captacha
-$("#realPerson").realperson({length: 5, hashName: 'realPersonHash',});
+$("#atmRealPerson").realperson({length: 5, hashName: 'realPersonHash',});
+$("#bankRealPerson").realperson({length: 5, hashName: 'realPersonHash',});
 });

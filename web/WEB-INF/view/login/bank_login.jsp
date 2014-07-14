@@ -24,7 +24,7 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                   </div>
                   <div class="form-group">
-                     <input type="text"  id="realPerson" name="realPerson">
+                     <input type="text"  id="bankRealPerson" name="realPerson">
                    </div>
                   <button type="submit" class="btn btn-primary btn-lg">Submit</button>
             </form>
