@@ -25,28 +25,22 @@ public class Authenticate
      public static boolean checkATMUser(String cardNumber,String pinCode) 
      {
       boolean st =false;
-      try{
-       
-	   //loading driver 
-           Class.forName("com.mysql.jdbc.Driver");
-         
-           
-           //creating connection with the database</b></font> 
-           Connection con=DriverManager.getConnection
-                        ("jdbc:mysql://localhost:3306/bank_atm_db","root","");
-           PreparedStatement ps =con.prepareStatement
-                             ("select * from user where username=? and password=?");
-           ps.setString(1, cardNumber);
-           ps.setString(2, pinCode);
-           ResultSet rs =ps.executeQuery();
-           st = rs.next();
-           //System.out.println(st);
-        
-        //return (cardNo.equals("user") && pinCode.equals("user") );
-      }catch(Exception e)
-      {
-          e.printStackTrace();
-      }
+        Session session = HibernateUtil.getSessionFactory().openSession();
+      //Transaction transaction = null;
+      try {
+        //    Transaction tx = session.beginTransaction();
+            String hql = "from User as u where u.username = :username and u.password = :password";
+            Query q = session.createQuery(hql);
+            q.setString("username",cardNumber);
+            q.setString("password", pinCode);
+            User user = (User) q.uniqueResult();
+            st = (user != null);
+            if(st)
+             System.out.println("\n\n logged in Added \n");
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error");
+        }
          return st;                 
   }   
      
@@ -85,7 +79,6 @@ public class Authenticate
             q.setString("username", username);
             q.setString("password", password);
             User user = (User) q.uniqueResult();
-            //tx.commit();
             st = (user != null);
             if(st)
              System.out.println("\n\n logged in Added \n");

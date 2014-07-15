@@ -63,6 +63,36 @@ jQuery( document ).ready(function( $ ) {
         $( "#bankAccountsBank" ).html( data );
         });
     });
+    
+   /**
+    * ATM button actions
+    * */
+    $(".atm-action").click(function(event) {
+         event.preventDefault();
+         var url =  $(this).attr('href');
+         //$.load()
+         //$.get( url, function( data ) {
+            $( "#atm-main-container" ).load(url);
+          //});
+          return false; 
+    });
+    
+     /*$(".logout").click(function(event) {
+         event.preventDefault();
+         var url =  $(this).attr('href');
+         //$.load()
+         //$.get( url, function( data ) {
+           // $( "#atm-main-container" ).load(url);
+          //});
+          $.post(url,function(data,status){
+              //alert("Data: " + data + "\nStatus: " + status);
+            });
+            
+          return false; 
+    });*/
+    
+   
+   
 //captacha
 //$("#realPerson").realperson();
 //$("#realPerson").realperson({chars: $.realperson.alphanumeric,length: 6});

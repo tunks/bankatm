@@ -42,6 +42,7 @@ public class Bank extends HttpServlet {
               if (customers != null){
                   request.setAttribute("customers",customers);
                 }
+               session.setAttribute("user", user);
                request.getRequestDispatcher("/WEB-INF/view/bank/bank.jsp").forward(request, response);             
              } else{
               request.setAttribute("reference","bank");

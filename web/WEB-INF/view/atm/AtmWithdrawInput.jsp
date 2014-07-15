@@ -89,7 +89,7 @@
             <tr>
                 <td>
                     <div>
-                        <a href="atm_transaction" class="button">></a>
+                        <a href="atm/transaction" class="button">></a>
                     </div>
                 </td>
                 <td>
@@ -104,7 +104,7 @@
                 </td>
                 <td>
                     <div>
-                        <a href="atm_logout" class="button"><</a>
+                        <a href="logout" class="button logout"><</a>
                     </div>
                 </td>
             </tr>

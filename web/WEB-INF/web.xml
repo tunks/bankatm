@@ -53,19 +53,19 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AtmTransaction</servlet-name>
-        <url-pattern>/atm_transaction</url-pattern>
+        <url-pattern>/atm/transaction</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AtmCheckBalance</servlet-name>
-        <url-pattern>/atm_checkbalance</url-pattern>
+        <url-pattern>/atm/checkbalance</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AtmWithdraw</servlet-name>
-        <url-pattern>/atm_withdraw</url-pattern>
+        <url-pattern>/atm/withdraw</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AtmLogout</servlet-name>
-        <url-pattern>/atm_logout</url-pattern>
+        <url-pattern>/atm/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -1,7 +1,7 @@
 <%-- 
-    Document   : atm
-    Created on : Jul 13, 2014, 11:34:08 PM
-    Author     : ebrima
+    Document   : AtmTransaction
+    Created on : Jul 14, 2014, 1:42:35 PM
+    Author     : tune
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,20 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-         <link href="vendor/bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">      
-        <script src="vendor/jquery/jquery-1.11.1.min.js"></script>
-        <script src="vendor/bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+        <title>ATM Transaction</title>
+        <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" />  
+         <script type="text/javascript" src="vendor/jquery/jquery-1.11.1.min.js"></script>
         <script type="text/javascript" src="javascripts/webapp.js"></script>
-        <title>JSP Page</title>
     </head>
     <body>
-       <div>
-            <h1>Welcome to the ATM page</h1>
-            <div>
-               <form action="logout" method="post" role="form">
-                 <button type="submit" class="btn btn-primary">Logout</button>
-               </form>
-            </div>
+        <div id="atm-main-container">
+        <%@include  file="AtmTransaction.jsp" %>
         </div>
     </body>
 </html>

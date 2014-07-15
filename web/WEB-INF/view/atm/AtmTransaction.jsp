@@ -12,7 +12,7 @@
         <title>ATM Transaction</title>
        
         <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" /> 
-        
+         <script type="text/javascript" src="javascripts/webapp.js"></script>
 
     </head>
     <body>
@@ -39,7 +39,7 @@
             <tr>
                 <td>
                     <div>
-                        <a href="atm_checkbalance" class="button">></a>
+                        <a href="atm/checkbalance" class="button atm-action">></a>
                     </div>
                 </td>
                 <td>
@@ -61,7 +61,7 @@
             <tr>
                 <td>
                     <div>
-                        <a href="atm_withdraw" class="button">></a>
+                        <a href="atm/withdraw" class="button atm-action">></a>
                     </div>
                 </td>
                 <td>
@@ -98,7 +98,7 @@
                 </td>
                 <td>
                     <div>
-                        <a href="atm_logout" class="button"><</a>
+                        <a href="logout" class="button logout"><</a>
                     </div>
                 </td>
             </tr>
