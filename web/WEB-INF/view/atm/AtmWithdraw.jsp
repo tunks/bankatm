@@ -1,8 +1,9 @@
 <%-- 
-    Document   : AtmTransaction
-    Created on : Jul 14, 2014, 1:42:35 PM
+    Document   : AtmWithdraw
+    Created on : Jul 14, 2014, 3:13:44 PM
     Author     : tune
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,46 +33,24 @@
             <tr>
                 <td colspan="4" height="120">
                     <div class="fontStyle-menu">
-                        Please Select Your Transaction
+                        Withdraw
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div>
-                        <a href="atm_checkbalance" class="button">></a>
+                        <a href="#" class="button">></a>
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                        Check Balance
+                        10$
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-right">
-                        
-                    </div>
-                </td>
-                <td>
-                    <div>
-                        <a href="#" class="button"><</a>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <div>
-                        <a href="atm_withdraw" class="button">></a>
-                    </div>
-                </td>
-                <td>
-                    <div class="fontStyle-left">
-                        withdraw
-                    </div>
-                </td>
-                <td>
-                    <div class="fontStyle-right">
-                 
+                        20$
                     </div>
                 </td>
                 <td>
@@ -88,7 +67,29 @@
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                     
+                        50$
+                    </div>
+                </td>
+                <td>
+                    <div class="fontStyle-right">
+                        OTHER
+                    </div>
+                </td>
+                <td>
+                    <div>
+                        <a href="#" class="button"><</a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div>
+                        <a href="atm_transaction" class="button">></a>
+                    </div>
+                </td>
+                <td>
+                    <div class="fontStyle-left">
+                        menu
                     </div>
                 </td>
                 <td>
@@ -109,3 +110,4 @@
         
     </body>
 </html>
+

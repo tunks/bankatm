@@ -1,4 +1,10 @@
 <%-- 
+    Document   : AtmCheckBalance
+    Created on : Jul 14, 2014, 3:14:05 PM
+    Author     : tune
+--%>
+
+<%-- 
     Document   : AtmTransaction
     Created on : Jul 14, 2014, 1:42:35 PM
     Author     : tune
@@ -32,19 +38,19 @@
             <tr>
                 <td colspan="4" height="120">
                     <div class="fontStyle-menu">
-                        Please Select Your Transaction
+                        Balance Checking
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div>
-                        <a href="atm_checkbalance" class="button">></a>
+                        <a href="#" class="button">></a>
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                        Check Balance
+                        Amount Money: 
                     </div>
                 </td>
                 <td>
@@ -61,12 +67,12 @@
             <tr>
                 <td>
                     <div>
-                        <a href="atm_withdraw" class="button">></a>
+                        <a href="#" class="button">></a>
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                        withdraw
+                      
                     </div>
                 </td>
                 <td>
@@ -83,12 +89,12 @@
             <tr>
                 <td>
                     <div>
-                        <a href="#" class="button">></a>
+                        <a href="atm_transaction" class="button">></a>
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                     
+                        menu
                     </div>
                 </td>
                 <td>
@@ -109,3 +115,4 @@
         
     </body>
 </html>
+
