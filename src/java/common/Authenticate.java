@@ -10,8 +10,14 @@ package common;
  *
  * @author ebrima
  */
-import java.sql.*;
 import com.mysql.jdbc.Driver;
+import java.sql.*;
+import model.classes.HibernateUtil;
+import model.classes.User;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 public class Authenticate
  {
@@ -47,7 +53,7 @@ public class Authenticate
    public static boolean checkBankUser(String username,String password) 
      {
       boolean st =false;
-      try{
+      /*try{
        
 	   //loading driver 
            Class.forName("com.mysql.jdbc.Driver");
@@ -68,6 +74,24 @@ public class Authenticate
       {
           e.printStackTrace();
       }
+      */
+      Session session = HibernateUtil.getSessionFactory().openSession();
+      //Transaction transaction = null;
+      try {
+
+        //    Transaction tx = session.beginTransaction();
+            String hql = "select users u where u.username = :username and u.password = :password";
+            Query q = session.createQuery(hql);
+            q.setString("username", username);
+            q.setString("password", password);
+            User user = (User) q.uniqueResult();
+            //tx.commit();
+            st = (user != null);
+            System.out.println("\n\n Details Added \n");
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            System.out.println("error");
+        }
          return st;                 
   }   
      

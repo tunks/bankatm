@@ -7,32 +7,26 @@ package model.classes;
  */
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 
-/**
- * Hibernate Utility class with a convenient method to get Session Factory
- * object.
- *
- * @author ebrima
- */
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory;
-    
-    static {
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
         try {
-            // Create the SessionFactory from standard (hibernate.cfg.xml) 
-            // config file.
-           // sessionFactory = new AnnotationConfiguration().configure().buildSessionFactory();
-            sessionFactory = new Configuration().configure("model/xml/hibernate.cfg.xml").buildSessionFactory();
-        } catch (Throwable ex) {
-            // Log the exception. 
+            // Create the SessionFactory from hibernate.cfg.xml
+           return new Configuration().configure("model/xml/hibernate.cfg.xml").buildSessionFactory(
+			    new StandardServiceRegistryBuilder().build() );
+        }
+        catch (Throwable ex) {
+            // Make sure you log the exception, as it might be swallowed
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
-    
+
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
