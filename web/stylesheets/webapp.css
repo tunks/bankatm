@@ -8,10 +8,11 @@ and open the template in the editor.
     Author     : ebrima
 */
 
-.main-login-container{
-    width:300px;
+div.center-block.main-login-container{
+    width:400px;
 }
 .main-login-container .tab-content{
     border: 1px solid #dde;
     padding: 20px;
+    margin-top: 5px;
 }

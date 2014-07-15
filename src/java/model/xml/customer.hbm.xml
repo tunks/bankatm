@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="model.classes.Customer" table="customers">
+     <meta attribute="class-description">
+	  This class contains the customer details.
+	</meta>
+        <id name="id" type="int" column="id">
+            <generator class="native"/>
+        </id>
+        <property name="name" type="string" column="name" not-null="true"/>
+        <property name="address" type="string" column="address" not-null="true"/>
+        <property name="phone" type="string" column="phone" not-null="true"/>
+        <property name="gender" type="string" column="gender" not-null="true"/>
+        <property name="dateOfBirth" type="date" column="date_of_birth" />
+        <property name="email" type="string" column="email" not-null="true"/>
+        <property name="nationalID" type="string" column="national_id" not-null="true"/>
+  </class>
+</hibernate-mapping>
+    

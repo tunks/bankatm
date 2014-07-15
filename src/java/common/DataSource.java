@@ -11,15 +11,17 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import com.mysql.jdbc.Driver;
+import java.sql.SQLException;
 /**
  *
- * @author ebrima
+ * @author ebrim
  */
-public class DataSource {
-    private  Connection conn = null;
+public  class DataSource  {
+    private  static Connection conn = null;
     //function to establish database connections
-    void connect(){
-          try{
+    
+    public Connection openConnection(){
+         try{
        
 	   //loading driver 
            Class.forName("com.mysql.jdbc.Driver");       
@@ -27,10 +29,11 @@ public class DataSource {
            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank_atm_db","root","");
            
         //return (cardNo.equals("user") && pinCode.equals("user") );
-      }catch(Exception e)
-      {
-          e.printStackTrace();
-      }
-    
+         }catch(Exception e)
+         {
+           e.printStackTrace();
+         }
+         return conn;
     }
+    
 }

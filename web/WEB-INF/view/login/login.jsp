@@ -32,7 +32,7 @@
     <body>
         <h1 class="center-block" style="text-align: center;margin-bottom: 20px;">Welcome to Farask Bank</h1>
         <div>
-            <div class="center-block" class="main-login-container">
+            <div class="center-block main-login-container" >
                 <%
                       if (errorMsg != null) {       
                  %>
