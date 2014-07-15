@@ -43,12 +43,10 @@ jQuery( document ).ready(function( $ ) {
                     type: "POST",
                     //the url where you want to sent the userName and password to
                     url: url,
-                    //dataType: 'json',
                     async: false,
-                    //json object to sent to the authentication url
                     data: $form.serialize(),
-                    success: function (response) {
-                    alert("Thanks!"); 
+                    success: function (data) {
+                      $( "#bankAccountsBank" ).html( data );
                     },
                     error:function(error){
                         console.log(error);
