@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author tune
  */
-@WebServlet(name = "AtmTransaction", urlPatterns = {"/AtmTransaction"})
-public class AtmTransaction extends HttpServlet {
+@WebServlet(name = "AtmWithdraw", urlPatterns = {"/AtmWithdraw"})
+public class AtmWithdraw extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,7 +32,7 @@ public class AtmTransaction extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/atm/AtmTransaction.jsp").forward(request, response);             
+        request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdraw.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
