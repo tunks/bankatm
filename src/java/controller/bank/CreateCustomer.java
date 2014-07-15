@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -66,8 +67,7 @@ public class CreateCustomer extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-            
+            throws ServletException, IOException {         
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
             
@@ -78,11 +78,14 @@ public class CreateCustomer extends HttpServlet {
             String phone = request.getParameter("phone");
 
             try{
-              if (BankActions.createCustomer(firstName,lastName, address,email, phone)){      
-                  out.println("successfully saved");
-                  out.close();
+              if (BankActions.createCustomer(firstName,lastName, address,email, phone)){
+                  List customers = BankActions.listCustomers();
+                  request.setAttribute("customers",customers);
+                  out.println("<div class=\"alert alert-success\">Successfully saved</div>");
+                  request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").include(request, response);
               }
               else{
+                  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                   out.println("Error data not saved");
                   out.close();
               }
@@ -92,8 +95,7 @@ public class CreateCustomer extends HttpServlet {
                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                out.println("Error saving data");
                out.close();
-            }     // request.setAttribute("MY_ERROR", "Database request failed");
-        
+            }   
     }
 
     
