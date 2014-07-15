@@ -23,7 +23,7 @@
                     <div>
                         <ul class="nav nav-pills">
                             <li>
-                                  <a href="bank/createcustomer" >Add Customer</a>
+                                  <a href="bank/createcustomer" id="addCustomer">Add Customer</a>
                             </li>
                             <li>
                                  <a href="bank/deposit" >Deposit</a>       
@@ -42,10 +42,10 @@
                               <li><a href="#atm" role="tab" data-toggle="tab">Transactions</a></li>
                           </ul>
                           <div class="tab-content">
-                                <div class="tab-pane active" id="bank">
-                                   Accounts
+                                <div class="tab-pane active" id="bankAccountsBank">
+                                    <%@include file="account_list.jsp" %>
                                 </div>
-                              <div class="tab-pane" id="atm">
+                              <div class="tab-pane" id="transactions">
                                    Transactions
                               </div>
                             </div> 

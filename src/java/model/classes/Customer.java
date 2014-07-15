@@ -16,30 +16,36 @@ import java.util.Date;
  */
 public class Customer implements Serializable{
     private int id;
-    private String name;
-    private Date dateOfBirth;
+    private String firstName;
+    private String lastName;
     private String address;
-    private String gender;
     private String phone;
-    private String nationalID;
     private String email;
     
-    public Customer(String name, String gender ,Date dateOfBirth, String address, String nationalID,String email,String phone){
-      this.name = name;
-      this.dateOfBirth = dateOfBirth;
+    Customer(){}
+    
+    public Customer(String firstName,String lastName,  String address, String email,String phone){
+      this.firstName = firstName;
+      this.lastName = lastName;
       this.address = address;
       this.email = email;
-      this.gender = gender;
       this.phone = phone;
-      this.nationalID = nationalID;
     }
     
-    public String getName(){
-      return name;
+    public String getFirstName(){
+      return firstName;
     }
     
-    public void setName(String name){
-       this.name = name;
+    public void setFirstName(String firstName){
+       this.firstName = firstName;
+    }
+    
+    public String getLastName(){
+      return lastName;
+    }
+    
+    public void setLastName(String lastName){
+       this.lastName = lastName;
     }
     
     public int getId(){
@@ -74,27 +80,4 @@ public class Customer implements Serializable{
        this.address = address;
     }
     
-    public String getGender(){
-      return gender;
-    }
-    
-    public void setGender(String gender){
-       this.gender = gender;
-    }
-    
-    public String getNationalID(){
-      return nationalID;
-    }
-    
-    public void setNationalID(String nationalID){
-       this.nationalID = nationalID;
-    }
-    
-    public Date getDateOfBirth(){
-      return dateOfBirth;
-    }
-    
-    public void setDateOfBirth(Date date){
-       this.dateOfBirth = date;
-    }
 }

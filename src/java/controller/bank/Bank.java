@@ -9,6 +9,7 @@ package controller.bank;
 import common.Authenticate;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -36,9 +37,13 @@ public class Bank extends HttpServlet {
 
            HttpSession session = request.getSession();
            String user = (String)session.getAttribute("user");
-           if ( user != null)
-              request.getRequestDispatcher("/WEB-INF/view/bank/bank.jsp").forward(request, response);             
-            else{
+           if ( user != null){
+              List customers = BankActions.listCustomers();
+              if (customers != null){
+                  request.setAttribute("customers",customers);
+                }
+               request.getRequestDispatcher("/WEB-INF/view/bank/bank.jsp").forward(request, response);             
+             } else{
               request.setAttribute("reference","bank");
               request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
              }  

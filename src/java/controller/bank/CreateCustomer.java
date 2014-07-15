@@ -7,6 +7,13 @@ package controller.bank;
 
 import common.Authenticate;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,23 +67,36 @@ public class CreateCustomer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//                First name: <input type="text" name="firstname"><br>
-//                Last name: <input type="text" name="lastname"><br>
-//                Address:<input type="text" name="address"><br>
-//                Email: <input type="text" name="email"><br>
-//                Phone: <input type="text" name="phone"><br>
-//                Account Number: <input type="text" name="accountno"><br>
-//                Initial Amount:<input type="text" name="iniamount"><br>
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        String address = request.getParameter("address");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String accountno = request.getParameter("accountno");
-        String iniamount = request.getParameter("iniamount");
+            
+            response.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = response.getWriter();
+            
+            String firstName = request.getParameter("firstname");
+            String lastName = request.getParameter("lastname");
+            String address = request.getParameter("address");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
 
+            try{
+              if (BankActions.createCustomer(firstName,lastName, address,email, phone)){      
+                  out.println("successfully saved");
+                  out.close();
+              }
+              else{
+                  out.println("Error data not saved");
+                  out.close();
+              }
+            }
+            catch(Exception e)
+            {
+               response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+               out.println("Error saving data");
+               out.close();
+            }     // request.setAttribute("MY_ERROR", "Database request failed");
+        
     }
 
+    
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -18,15 +18,16 @@
     </head>
     <body>
         <div>
-            <form action="createcustomer" method="post" role="form"><br>
-                First name: <input type="text" name="firstname"><br>
-                Last name: <input type="text" name="lastname"><br>
-                Address:<input type="text" name="address"><br>
-                Email: <input type="text" name="email"><br>
-                Phone: <input type="text" name="phone"><br>
-                Account Number: <input type="text" name="accountno"><br>
-                Initial Amount:<input type="text" name="iniamount"><br>
-                <button type="submit" class="btn btn-primary">Create Accoutnt</button>
+            <form action="bank/createcustomer" method="post" role="form" id="createCustomer"><br>
+                First name: <input type="text" name="firstname" /><br>
+                Last name: <input type="text" name="lastname" /><br>
+                Address:<input type="text" name="address" /><br>
+                Email: <input type="text" name="email" /><br>
+                Phone: <input type="text" name="phone" /><br>
+                Account Number: <input type="text" name="accountno" /><br>
+                Initial Amount:<input type="text" name="iniamount" /><br>
+                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="closeCustomerForm">Cancel</button>
             </form>
         </div>
     </body>

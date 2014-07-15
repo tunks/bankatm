@@ -26,42 +26,39 @@ import org.hibernate.Transaction;
 public class BankActions {
 
 	
-	public Long createCustomer(String name, String gender ,Date dateOfBirth, String address, String nationalID,String email,String phone)
+	public static boolean createCustomer(String firstName,String lastName, String address, String email,String phone)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
-		Long courseId = null;
+		boolean save = false;
 		try {
 			transaction = session.beginTransaction();
-			Customer customer = new Customer(name, gender,dateOfBirth,address,nationalID,email, phone);
+			Customer customer = new Customer(firstName,lastName,address,email, phone);
 			//customer.setCourseName(courseName);
-			courseId = (Long) session.save(customer);
+		        session.save(customer);
 			transaction.commit();
+                        save = true;
+                        
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return courseId;
+		return save;
 		
 	}
 	
-	public List<Customer> listCustomers()
+	public static List<Customer> listCustomers()
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
 		try {
 			transaction = session.beginTransaction();
-			List customers = session.createQuery("from customer").list();
-			/*for (Iterator iterator = courses.iterator(); iterator.hasNext();)
-			{
-				Customer customer = (Customer) iterator.next();
-				System.out.println(course.getCourseName());
-			}
-                        */
+			List customers = session.createQuery("from Customer").list();
 			transaction.commit();
 			return customers;
+                        
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();

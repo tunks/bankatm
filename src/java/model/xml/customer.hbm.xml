@@ -8,13 +8,11 @@
         <id name="id" type="int" column="id">
             <generator class="native"/>
         </id>
-        <property name="name" type="string" column="name" not-null="true"/>
+        <property name="firstName" type="string" column="first_name" not-null="true"/>
+        <property name="lastName" type="string" column="last_name" not-null="true"/>
         <property name="address" type="string" column="address" not-null="true"/>
         <property name="phone" type="string" column="phone" not-null="true"/>
-        <property name="gender" type="string" column="gender" not-null="true"/>
-        <property name="dateOfBirth" type="date" column="date_of_birth" />
         <property name="email" type="string" column="email" not-null="true"/>
-        <property name="nationalID" type="string" column="national_id" not-null="true"/>
   </class>
 </hibernate-mapping>
     
