@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">   
     <servlet>
         <servlet-name>bank</servlet-name>
         <servlet-class>controller.bank.Bank</servlet-class>
@@ -29,11 +29,21 @@
         <servlet-class>controller.atm.AtmWithdraw</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AtmWithdrawInput</servlet-name>
+        <servlet-class>controller.atm.AtmWithdrawInput</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtmWithdrawConfirm</servlet-name>
+        <servlet-class>controller.atm.AtmWithdrawConfirm</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AtmWithdrawInvalid</servlet-name>
+        <servlet-class>controller.atm.AtmWithdrawInvalid</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AtmLogout</servlet-name>
         <servlet-class>controller.atm.AtmLogout</servlet-class>
     </servlet>
-
-
 
     <servlet-mapping>
         <servlet-name>bank</servlet-name>
@@ -62,6 +72,18 @@
     <servlet-mapping>
         <servlet-name>AtmWithdraw</servlet-name>
         <url-pattern>/atm_withdraw</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtmWithdrawInput</servlet-name>
+        <url-pattern>/atm_withdraw_input</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtmWithdrawConfirm</servlet-name>
+        <url-pattern>/atm_withdraw_confirm</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtmWithdrawInvalid</servlet-name>
+        <url-pattern>/atm_withdraw_invalid</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AtmLogout</servlet-name>
