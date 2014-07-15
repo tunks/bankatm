@@ -13,13 +13,20 @@
         <title>ATM Transaction</title>
        
         <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" /> 
-        <script type="text/javascript" src="javascripts/atm_javascript.js"></script>
+        
+        <script>
+            function YES(){
+                alert(document.getElementById("WAmount").value);
+            }
+        </script>
 
     </head>
     <body>
         
+        <% String WAmount = (String)request.getAttribute("WAmount"); %>
+        
         <form id="Withdraw" action="atm_withdraw_confirm" method="post">
-            <input type="hidden" id="WAmount" name="WAmount" value="0">
+            <input type="hidden" id="WAmount" name="WAmount" value=" <%=WAmount%>">
         </form>
         
         <table class="center">
@@ -37,73 +44,63 @@
             <tr>
                 <td colspan="4" height="120">
                     <div class="fontStyle-menu">
-                        Withdraw
+                        Confirm withdraw transaction 
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div>
-                        <a href="#" class="button" onclick="saveAmount10()">></a>
+                        <a href="#" class="button">></a>
                     </div>
                 </td>
-                <td>
-                    <div class="fontStyle-left">
-                        10$
-                    </div>
-                </td>
-                <td>
-                    <div class="fontStyle-right">
-                        20$
+                <td colspan="2">
+                    <div class="fontStyle-center">
+                        You want to withdraw <%=WAmount%>$ <br> from your account. 
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="#" class="button" onclick="saveAmount20()"><</a>
+                        <a href="#" class="button"><</a>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div>
-                        <a href="#" class="button" onclick="saveAmount50()">></a>
+                        <a href="#" class="button">></a>
                     </div>
                 </td>
-                <td>
-                    <div class="fontStyle-left">
-                        50$
-                    </div>
-                </td>
-                <td>
-                    <div class="fontStyle-right">
-                        OTHER
+                <td colspan="2">
+                    <div class="fontStyle-center">
+                        
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="atm_withdraw_input" class="button"><</a>
+                        <a href="#" class="button"><</a>
                     </div>
                 </td>
             </tr>
             <tr>
                 <td>
                     <div>
-                        <a href="atm_transaction" class="button">></a>
+                        <a href="#" class="button" onclick="YES()">></a>
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                        menu
+                        yes
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-right">
-                        log out
+                        no, back to menu
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="atm_logout" class="button"><</a>
+                        <a href="atm_transaction" class="button"><</a>
                     </div>
                 </td>
             </tr>
