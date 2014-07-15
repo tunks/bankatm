@@ -65,6 +65,17 @@ th, td {
     text-align:right;
 }
 
+.fontStyle-center {
+    font-family:  'Hoefler Text', Georgia, 'Times New Roman', serif;
+    font-weight: normal;
+    font-size: 1.30em;
+    letter-spacing: .12em;	
+    line-height: 1.1em;
+    margin:0px;
+    text-transform: uppercase;
+    text-align:center;
+}
+
 /* -------------- THE button -------------- */
 .button {
 
