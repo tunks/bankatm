@@ -67,38 +67,36 @@ public class CreateCustomer extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {         
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            
-            String firstName = request.getParameter("firstname");
-            String lastName = request.getParameter("lastname");
-            String address = request.getParameter("address");
-            String email = request.getParameter("email");
-            String phone = request.getParameter("phone");
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
 
-            try{
-              if (BankActions.createCustomer(firstName,lastName, address,email, phone)){
-                  List customers = BankActions.listCustomers();
-                  request.setAttribute("customers",customers);
-                  out.println("<div class=\"alert alert-success\">Successfully saved</div>");
-                  request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").include(request, response);
-              }
-              else{
-                  response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                  out.println("Error data not saved");
-                  out.close();
-              }
+        String firstName = request.getParameter("firstname");
+        String lastName = request.getParameter("lastname");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phone = request.getParameter("phone");
+        String accountType = request.getParameter("accountType");
+        double openningAmount = 100;//Double.parseDouble(request.getParameter("openningAmount"));
+        try {
+            if (BankActions.createCustomer(firstName, lastName, address, email, phone, accountType, openningAmount)) {
+                List customers = BankActions.listCustomers();
+                request.setAttribute("customers", customers);
+                out.println("<div class=\"alert alert-success\">Successfully saved</div>");
+                request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").include(request, response);
+            } else {
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                out.println("Error data not saved");
+                out.close();
             }
-            catch(Exception e)
-            {
-               response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-               out.println("Error saving data");
-               out.close();
-            }   
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.println("Error saving data");
+            out.close();
+        }
     }
 
-    
     @Override
     public String getServletInfo() {
         return "Short description";
