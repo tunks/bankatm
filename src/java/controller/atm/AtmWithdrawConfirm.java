@@ -40,7 +40,7 @@ public class AtmWithdrawConfirm extends HttpServlet {
             request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawConfirm.jsp").forward(request, response);
         }
         else{
-            request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawConfirm.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
         }
  
     }
