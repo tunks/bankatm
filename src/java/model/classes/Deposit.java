@@ -24,5 +24,9 @@ public class Deposit extends Transaction {
       return userId;
     }
     
+    public void setUserId(int userId){
+      this.userId  = userId;
+    }
+    
 }
 

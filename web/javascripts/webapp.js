@@ -17,7 +17,24 @@ jQuery( document ).ready(function( $ ) {
 });
 */
 
+
+  $("a.bind-jquery-event-here-class").bind("click", function(event) {
+    event.preventDefault();
+    var url = $(this).attr("href");
+        alert("loading via proxy: " + url);
+    $.ajax({
+      type: "POST",
+      url: "proxy.php",
+      data: "url="+url, 
+      success: function(data){
+        alert("finally got data " + data);
+      }
+    });
+    });
+    
 //captacha
 $("#realPerson").realperson();
 $("#realPerson").realperson({chars: $.realperson.alphanumeric,length: 6});
+
+
 });

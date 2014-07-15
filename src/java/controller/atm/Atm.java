@@ -85,7 +85,7 @@ public class Atm extends HttpServlet {
             session.setAttribute("user",cardNumber);
             
             
-            session.setAttribute("user", "Pankaj");
+           // session.setAttribute("user", "Pankaj");
             //setting session to expiry in 30 mins
             session.setMaxInactiveInterval(30*60);
             Cookie userName = new Cookie("user", cardNumber);

@@ -25,23 +25,35 @@ public class Card implements Serializable{
       this.pinCode = pinCode;
     }
     
+    
     public int getId(){
        return id;
     }
     
+    public void setId(int id){
+      this.id = id;
+    }
+    
     public int getCustomerId(){
        return customerId;
+    }
+    public void setCustomerId(int customerId){
+      this.customerId = customerId;
     }
     
     public void setPinCode(int pinCode){
       this.pinCode = pinCode;
     }
     
-    public int getCardNumber(){
+    public int getPinCode(){
+     return pinCode;
+    }
+    
+    public int getCardNo(){
         return cardNo;
     }
     
-    public void setCardNumber(int cardNo){
+    public void setCardNo(int cardNo){
         this.cardNo = cardNo;
     }
 }

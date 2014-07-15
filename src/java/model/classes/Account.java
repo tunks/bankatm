@@ -37,12 +37,24 @@ public class Account implements Serializable {
        return id;
     }
     
-    public int getAccountNumber(){
+    public void setId(int id){
+      this.id = id;
+    }
+    
+    public int getAccountNo(){
        return accountNo;
+    }
+    
+    public void setAccountNo(int accountNo){
+       this.accountNo = accountNo;
     }
     
     public int getCustomerId(){
        return customerId;
+    }
+    
+    public void setCustomerId( int customerId){
+       this.customerId = customerId;
     }
     
     public double getAmount(){
@@ -55,6 +67,10 @@ public class Account implements Serializable {
     
     public String getAccountType(){
       return accountType;
+    }
+    
+    public void setAccountType(String accountType){
+      this.accountType = accountType;
     }
     
     public Date getDateCreated(){

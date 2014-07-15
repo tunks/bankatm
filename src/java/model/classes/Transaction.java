@@ -29,13 +29,32 @@ public class Transaction implements Serializable{
     public int getId(){
      return id;
     }
+    
+    public void setId(int id){
+     this.id = id;
+    }
+    
     public double getAmount(){
      return amount;
     }
-     public int getAccountId(){
+    
+    public void setAmount(double amount){
+      this.amount = amount;
+    }
+    
+    public int getAccountId(){
      return accountId;
     }
+    
+    public void setAccountId( int accountId){
+       this.accountId = accountId;
+    }
+    
     public Date getDate(){
       return date;
+    }
+    
+    public void setDate(Date date){
+      this.date = date;
     }
 }

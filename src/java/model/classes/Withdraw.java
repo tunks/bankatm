@@ -21,4 +21,8 @@ public class Withdraw extends Transaction {
      return cardId;
     }
     
+    
+    public void setCardId(int cardId){
+      this.cardId = cardId;
+    }
 }

@@ -80,14 +80,15 @@ public class Authenticate
       try {
 
         //    Transaction tx = session.beginTransaction();
-            String hql = "select users u where u.username = :username and u.password = :password";
+            String hql = "from User as u where u.username = :username and u.password = :password";
             Query q = session.createQuery(hql);
             q.setString("username", username);
             q.setString("password", password);
             User user = (User) q.uniqueResult();
             //tx.commit();
             st = (user != null);
-            System.out.println("\n\n Details Added \n");
+            if(st)
+             System.out.println("\n\n logged in Added \n");
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             System.out.println("error");
