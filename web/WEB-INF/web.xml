@@ -5,6 +5,14 @@
         <servlet-class>controller.bank.Bank</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>createcustomer</servlet-name>
+        <servlet-class>controller.bank.CreateCustomer</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deposit</servlet-name>
+        <servlet-class>controller.bank.Deposit</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Atm</servlet-name>
         <servlet-class>controller.atm.Atm</servlet-class>
     </servlet>
@@ -30,6 +38,14 @@
     <servlet-mapping>
         <servlet-name>bank</servlet-name>
         <url-pattern>/bank</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createcustomer</servlet-name>
+        <url-pattern>/bank/createcustomer</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>deposit</servlet-name>
+        <url-pattern>/bank/deposit</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Atm</servlet-name>
