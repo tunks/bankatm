@@ -43,3 +43,7 @@ function saveAmount50(){
 function submitSaveAmount(){
     document.getElementById("Withdraw").submit();
 }
+
+function ConfirmWithdraw(){
+    document.getElementById("Withdraw").submit();
+}

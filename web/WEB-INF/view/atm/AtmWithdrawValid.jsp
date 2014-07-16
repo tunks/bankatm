@@ -1,14 +1,9 @@
 <%-- 
-    Document   : AtmCheckBalance
-    Created on : Jul 14, 2014, 3:14:05 PM
+    Document   : AtmWithdraw
+    Created on : Jul 14, 2014, 3:13:44 PM
     Author     : tune
 --%>
 
-<%-- 
-    Document   : AtmTransaction
-    Created on : Jul 14, 2014, 1:42:35 PM
-    Author     : tune
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,12 +13,12 @@
         <title>ATM Transaction</title>
        
         <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" /> 
-        
+        <script type="text/javascript" src="javascripts/atm_javascript.js"></script>
 
     </head>
     <body>
         
-        <% String amount = (String)request.getAttribute("amount"); %>
+        <% String ValidMessage = (String)request.getAttribute("ValidMessage"); %>
         
         <table class="center">
             <col width="100px" />
@@ -40,7 +35,7 @@
             <tr>
                 <td colspan="4" height="120">
                     <div class="fontStyle-menu">
-                        Balance Checking
+                        Successful
                     </div>
                 </td>
             </tr>
@@ -52,7 +47,7 @@
                 </td>
                 <td colspan="2">
                     <div class="fontStyle-center">
-                        Amount Money: <%=amount%>$
+                        <%=ValidMessage%>
                     </div>
                 </td>
                 <td>
@@ -69,12 +64,12 @@
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                      
+                        
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-right">
-                 
+                        
                     </div>
                 </td>
                 <td>

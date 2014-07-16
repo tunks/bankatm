@@ -13,20 +13,15 @@
         <title>ATM Transaction</title>
        
         <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" /> 
+        <script type="text/javascript" src="javascripts/atm_javascript.js"></script>
         
-        <script>
-            function YES(){
-                alert(document.getElementById("WAmount").value);
-            }
-        </script>
-
     </head>
     <body>
         
         <% String WAmount = (String)request.getAttribute("WAmount"); %>
         
-        <form id="Withdraw" action="atm_withdraw_confirm" method="post">
-            <input type="hidden" id="WAmount" name="WAmount" value=" <%=WAmount%>">
+        <form id="Withdraw" action="atm_withdraw" method="post">
+            <input type="hidden" id="WAmount" name="WAmount" value="<%=WAmount%>">
         </form>
         
         <table class="center">
@@ -85,7 +80,7 @@
             <tr>
                 <td>
                     <div>
-                        <a href="#" class="button" onclick="YES()">></a>
+                        <a href="#" class="button" onclick="ConfirmWithdraw()">></a>
                     </div>
                 </td>
                 <td>

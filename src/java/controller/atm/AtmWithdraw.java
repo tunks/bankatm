@@ -61,8 +61,41 @@ public class AtmWithdraw extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        int WAmount = Integer.parseInt(request.getParameter("WAmount"));
+        AtmActions atmAction = new AtmActions();
+        
+        //check accout have more money than user request
+        double AAmount = 25; //assume
+        //double AAmount = atmAction.getAmountfromCustomerID(atmAction.getCustomerIDfromCardID(CardId));
+      
+        if(WAmount > AAmount) {
+            request.setAttribute("InvalidMessage", "Money in your account is not enought to do the transaction");
+            request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
+        }
+  
+        //check transection not over than 1000$ per day
+        double WTran = 88; //assume
+      
+        if(WTran + WAmount > 1000) {
+            request.setAttribute("InvalidMessage", "You Can not withdraw the money more that 1000$ per day");
+            request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
+        }
+        
+        
+        
+        //update table account
+        
+        //update table transaction
+        
+        //sent sms
+        
+        
+        request.setAttribute("ValidMessage", "your withdraw transaction<br>is completed");
+        request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawValid.jsp").forward(request, response);
+        
     }
+    
 
     /**
      * Returns a short description of the servlet.

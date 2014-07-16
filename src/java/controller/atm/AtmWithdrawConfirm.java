@@ -34,12 +34,13 @@ public class AtmWithdrawConfirm extends HttpServlet {
             throws ServletException, IOException {
         
         String WAmount = request.getParameter("WAmount");
-        request.setAttribute("WAmount", WAmount);
         
         if(Integer.parseInt(WAmount)>0 && Integer.parseInt(WAmount)<=1000){
+            request.setAttribute("WAmount", WAmount);
             request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawConfirm.jsp").forward(request, response);
         }
         else{
+            request.setAttribute("InvalidMessage", "You Can not withdraw the money more that 1000$ per day");
             request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
         }
  

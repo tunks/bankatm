@@ -18,6 +18,8 @@
     </head>
     <body>
         
+        <% String InvalidMessage = (String)request.getAttribute("InvalidMessage"); %>
+        
         <form id="Withdraw" action="atm_withdraw_confirm" method="post">
             <input type="hidden" id="WAmount" name="WAmount" value="0">
         </form>
@@ -49,7 +51,7 @@
                 </td>
                 <td colspan="2">
                     <div class="fontStyle-center">
-                        You Can not withdraw the money more that 1000$ per day
+                        <%=InvalidMessage%>
                     </div>
                 </td>
                 <td>
