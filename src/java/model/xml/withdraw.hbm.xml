@@ -10,7 +10,7 @@
         </id>
         <property name="accountId" type="int" column="account_id" not-null="true"/>
         <property name="cardId" type="int" column="card_id" />
-        <property name="date" type="date" column="date" not-null="true"/>
+        <property name="date" type="date" column="date"/>
         <property name="amount" type="double" column="amount" not-null="true"/>
   </class>
 </hibernate-mapping>

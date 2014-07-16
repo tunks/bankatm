@@ -12,6 +12,10 @@ package model.classes;
  */
 public class Withdraw extends Transaction {
     private int cardId;
+
+    public Withdraw() {
+    }
+    
     public Withdraw(int accountNo, int cardId, double amount) {
         super(accountNo,amount,"Withdraw");
         this.cardId = cardId;

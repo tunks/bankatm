@@ -14,16 +14,27 @@ import java.util.Date;
  * @author ebrima
  */
 public class Transaction implements Serializable{
-    protected int id;
-    protected int accountId;
-    protected double amount;
-    protected Date date;
-    private String typeOfTransaction;
+    private int id;
+    private double amount;
+    private int accountId;
+    private Date date;
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Transaction() {
+    }
     
-    public Transaction(int accountId,double amount , String typeOfTransaction){
+    public Transaction(int accountId,double amount , String type){
          this.accountId = accountId;
          this.amount = amount;
-         this.typeOfTransaction = typeOfTransaction;
+         this.type = type;
     }
     
     public int getId(){
@@ -57,4 +68,8 @@ public class Transaction implements Serializable{
     public void setDate(Date date){
       this.date = date;
     }
+
+
+    
+    
 }

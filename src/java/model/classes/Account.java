@@ -21,6 +21,9 @@ public class Account implements Serializable {
     private String accountType;
     private Date dateCreated;
     private double amount;
+
+    public Account() {
+    }
     
     public Account(String accountType, double amount){
        this.accountType = accountType;

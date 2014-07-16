@@ -48,13 +48,8 @@
                         <a href="#" class="button">></a>
                     </div>
                 </td>
-                <td>
-                    <div class="fontStyle-left">
-                        
-                    </div>
-                </td>
-                <td>
-                    <div class="fontStyle-right">
+                <td colspan="2">
+                    <div class="fontStyle-center">
                        <input type="text" id="WithdrawAmount" name="WithdrawAmount" maxlength="4" onkeypress='numberOnly(event)' autofocus>
                     </div>
                 </td>

@@ -18,6 +18,9 @@ public class Card implements Serializable{
     private int customerId;
     private int cardNo;
     private int pinCode;
+
+    public Card() {
+    }
     
     public Card(int customerId, int cardNo, int pinCode){
       this.customerId = customerId;
