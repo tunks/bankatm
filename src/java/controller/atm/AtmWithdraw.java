@@ -8,6 +8,9 @@ package controller.atm;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -63,20 +66,25 @@ public class AtmWithdraw extends HttpServlet {
             throws ServletException, IOException {
         
         int WAmount = Integer.parseInt(request.getParameter("WAmount"));
-        AtmActions atmAction = new AtmActions();
         
         //check accout have more money than user request
-        double AAmount = 25; //assume
-        //double AAmount = atmAction.getAmountfromCustomerID(atmAction.getCustomerIDfromCardID(CardId));
+        //double AAmount = 25; //assume
+        int CardId = 888; //assume
+        double AAmount = AtmActions.getAmountfromCustomerID(AtmActions.getCustomerIDfromCardID(CardId));
       
+        System.out.println("AAmount = "+AAmount);
         if(WAmount > AAmount) {
             request.setAttribute("InvalidMessage", "Money in your account is not enought to do the transaction");
             request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
         }
   
         //check transection not over than 1000$ per day
-        double WTran = 88; //assume
-      
+        CardId = 888; //assume
+        Date today = AtmActions.getTodayDate();
+        
+        //double WTran = 88; //assume
+        double WTran = AtmActions.getAmountWithdrawFromTransactioin(CardId, today);
+        System.out.println("WTran = " + WTran);
         if(WTran + WAmount > 1000) {
             request.setAttribute("InvalidMessage", "You Can not withdraw the money more that 1000$ per day");
             request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);

@@ -6,6 +6,7 @@
 
 package controller.atm;
 
+import controller.bank.BankActions;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -40,21 +41,22 @@ public class AtmCheckBalance extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //assume id of card = 888
-        int CardId = 888;
-       
-        AtmActions atmAction = new AtmActions();
-        double amount = atmAction.getAmountfromCustomerID(atmAction.getCustomerIDfromCardID(CardId));
-        //double amount = 55;
+        
+        int CardId = 888; //assume
+        int CusId =  AtmActions.getCustomerIDfromCardID(CardId);
+        System.out.println("CusId = "+CusId);
+        double amount =  AtmActions.getAmountfromCustomerID(CusId);
+        System.out.println("amount = "+amount);
         
         if(amount != -1) {
             request.setAttribute("amount", String.valueOf(amount));
             request.getRequestDispatcher("/WEB-INF/view/atm/AtmCheckBalance.jsp").forward(request, response);   
         }
         else {
-            //error
+            request.setAttribute("InvalidMessage", "Account not found");
+            request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
         }
-   
+  
     }
    
     
