@@ -7,12 +7,18 @@
 package controller.atm;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.classes.Card;
+import model.classes.HibernateUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -32,10 +38,43 @@ public class AtmCheckBalance extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        //assume id of card = 888
+        String CardId = "888";
+       
+        getAmount(Integer.parseInt(CardId));
+       
         request.getRequestDispatcher("/WEB-INF/view/atm/AtmCheckBalance.jsp").forward(request, response);   
   
 
     }
+   
+    public void getAmount(int cardId) {
+      
+        Session session = HibernateUtil.getSessionFactory().openSession();
+	Transaction transaction = null;
+        
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from Card where id = :id ");
+            query.setParameter("id", cardId);
+            
+            List<Card> list = query.list();
+            Card card = list.get(0);
+            
+            System.out.print(card.getCustomerId());
+            
+            
+
+            //return list.get(0).;
+	} catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+	} finally {
+            session.close();
+	}
+     
+	}
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -75,5 +114,9 @@ public class AtmCheckBalance extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void getAmount(String CardId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
