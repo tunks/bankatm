@@ -10,25 +10,38 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="vendor/bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">      
+        <link href="vendor/bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet" media="screen"> 
         <script src="vendor/jquery/jquery-1.11.1.min.js"></script>
         <script src="vendor/bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="javascripts/webapp.js"></script>
         <title>Create New Account</title>
     </head>
     <body>
-        <div>
+        <div class="create-customer-form-container">
             <form action="bank/createcustomer" method="post" role="form" id="createCustomer"><br>
-                First name: <input type="text" name="firstname" /><br>
-                Last name: <input type="text" name="lastname" /><br>
-                Address:<input type="text" name="address" /><br>
-                Email: <input type="text" name="email" /><br>
-                Phone: <input type="text" name="phone" /><br>
-                Account Number: <input type="text" name="accountno" /><br>
-                Initial Amount:<input type="text" name="iniamount" /><br>
-                <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn-primary" id="closeCustomerForm">Cancel</button>
+                <fieldset><legend>Create Customer Profile</legend>
+                    <table
+                        <tr><td>First name:</td><td> <input type="text" name="firstname" /></td></tr>
+                        <tr><td>Last name:</td> <td><input type="text" name="lastname" /></td></tr>
+                        <tr><td>Address:</td><td><input type="text" name="address" /></td></tr>
+                        <tr><td>Email:</td><td><input type="text" name="email" /></td><tr>
+                        <tr><td>Phone:</td><td><input type="text" name="phone" /></td></tr>
+                    </table>
+
+                </fieldset>
+                <fieldset><legend>Enter Account Information</legend>
+                    <table>
+                    <tr><td>Account Number:</td><td> <input type="text" name="accountno" /></td></tr>
+                    <tr><td>Account Type:</td><td> <input type="text" name="accountType" /></td></tr>
+                    <tr><td>Initial Amount:</td><td><input type="text" name="openinngAmount" /></td></tr>
+                    </table>
+                </fieldset>
+                <table>
+                <tr><td><button type="submit" class="btn btn-primary">Save</button></td>
+                <td><button type="button" class="btn btn-primary" id="closeCustomerForm">Cancel</button></td></tr>
+                </table>
             </form>
+
         </div>
     </body>
 </html>

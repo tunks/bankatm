@@ -26,7 +26,7 @@ import org.hibernate.Transaction;
 public class BankActions {
 
 	
-	public static boolean createCustomer(String firstName,String lastName, String address, String email,String phone)
+	public static boolean createCustomer(String firstName,String lastName, String address, String email,String phone, String accountType, double  openningAmount)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
@@ -34,11 +34,13 @@ public class BankActions {
 		try {
 			transaction = session.beginTransaction();
 			Customer customer = new Customer(firstName,lastName,address,email, phone);
-			//customer.setCourseName(courseName);
-		        session.save(customer);
+		        int customerId = (Integer) session.save(customer);
 			transaction.commit();
-                        save = true;
-                        
+                       // if(customerId != null)
+                        //{
+                            save = addCustomerAccount(customerId,accountType, openningAmount);
+                         //}
+                                              
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -102,24 +104,25 @@ public class BankActions {
 		}
 	}
         
-        public Long addCustomerAccount(int customerId, String accountType, double openningAmount)
+        public static boolean addCustomerAccount(int customerId, String accountType, double openningAmount)
 	{
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
-		Long courseId = null;
+		boolean save = false;
 		try {
 			transaction = session.beginTransaction();
 			Account account = new Account(customerId,accountType,openningAmount);
 			//customer.setCourseName(courseName);
-			courseId = (Long) session.save(account);
+		        session.save(account);
 			transaction.commit();
+                        save = true;
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
 		} finally {
 			session.close();
 		}
-		return courseId;
+		return save;
 		
 	}
         

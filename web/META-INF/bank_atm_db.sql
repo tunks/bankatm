@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.10.1deb1
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 15, 2014 at 07:22 PM
--- Server version: 5.5.37
--- PHP Version: 5.3.10-1ubuntu3.12
+-- Generation Time: Jul 15, 2014 at 09:55 PM
+-- Server version: 5.6.12-log
+-- PHP Version: 5.4.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `bank_atm_db`
 --
+CREATE DATABASE IF NOT EXISTS `bank_atm_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `bank_atm_db`;
 
 -- --------------------------------------------------------
 
@@ -27,14 +29,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `accounts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) NOT NULL,
   `account_no` int(11) NOT NULL,
   `account_type` varchar(45) NOT NULL,
-  `date_created` datetime NOT NULL,
+  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
   `balance` double DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `accounts`
+--
+
+INSERT INTO `accounts` (`id`, `customer_id`, `account_no`, `account_type`, `date_created`, `balance`) VALUES
+(1, 19, 0, 'Savings', NULL, 100);
 
 -- --------------------------------------------------------
 
@@ -67,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `customers` (
   `national_id` varchar(100) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `customers`
@@ -83,7 +92,11 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `address`, `phone`, `g
 (10, 'James', 'Arin', 'Washington', '234234', 'male', NULL, NULL, 'james@gmai.com'),
 (11, 'Kaddi', 'Mare', 'Ba', '', 'male', NULL, NULL, ''),
 (12, 'Kami', 'Tunkar', 'adfsf', '', 'male', NULL, NULL, 'dfsdf'),
-(13, 'Kami', 'Tunkar', 'adfsf', '', 'male', NULL, NULL, 'dfsdf');
+(13, 'Kami', 'Tunkar', 'adfsf', '', 'male', NULL, NULL, 'dfsdf'),
+(16, 'lisa', 'Ab', 'll', '123', 'male', NULL, NULL, 'll'),
+(17, 'Pateh', 'Demba', 'Banjul', '877', 'male', NULL, NULL, 'apta@kk'),
+(18, 'aa', 'bb', 'cc', 'ee', 'male', NULL, NULL, 'dd'),
+(19, 'Ousman', 'Camaraa', 'Banjull', '88888', 'male', NULL, NULL, 'test@localhost.local');
 
 -- --------------------------------------------------------
 
@@ -92,13 +105,13 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `address`, `phone`, `g
 --
 
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT NULL,
   `session` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -107,14 +120,14 @@ CREATE TABLE IF NOT EXISTS `sessions` (
 --
 
 CREATE TABLE IF NOT EXISTS `transancations` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `amount` decimal(10,0) NOT NULL,
   `account_id` int(11) NOT NULL,
   `date` datetime NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `card_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -123,18 +136,18 @@ CREATE TABLE IF NOT EXISTS `transancations` (
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `username`, `password`) VALUES
-(0, 'test', 'test1');
+(1, 'test', 'test1');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
