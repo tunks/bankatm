@@ -25,12 +25,11 @@ public class Authenticate
      public static boolean checkATMUser(String cardNumber,String pinCode) 
      {
       boolean st =false;
+      Encryption en=new Encryption();
       try{
        
 	   //loading driver 
-           Class.forName("com.mysql.jdbc.Driver");
-         
-           
+           Class.forName("com.mysql.jdbc.Driver");           
            //creating connection with the database</b></font> 
            Connection con=DriverManager.getConnection
                         ("jdbc:mysql://localhost:3306/bank_atm_db","root","");
