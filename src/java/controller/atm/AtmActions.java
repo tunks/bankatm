@@ -6,89 +6,121 @@
 
 package controller.atm;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import model.classes.Account;
-import model.classes.Customer;
-import model.classes.Deposit;
+import model.classes.Card;
 import model.classes.HibernateUtil;
 import model.classes.Withdraw;
 import org.hibernate.HibernateException;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+/**
+ *
+ * @author tune
+ */
 public class AtmActions {
-	
-	public static List<Account> listAccounts(int customerId)
-	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			List customers = session.createQuery("from Account where card").list();
-			transaction.commit();
-			return customers;
-                        
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-			return null;
-		} finally {
-			session.close();
-		}
-	}
-	
-	public void updateCustomer(Long customerId, String courseName)
-	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		try {
-			transaction = session.beginTransaction();
-			Customer course = (Customer) session.get(Customer.class, customerId);
-			//course.setCourseName(courseName);
-			transaction.commit();
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
+    
+    public static int getCustomerIDfromCardID(int cardId) {
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+	Transaction transaction = null;
+        
+        try {
+            
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from Card where id= :id ");
+            query.setParameter("id", cardId);
+            
+            List<Card> list = query.list();
+
+            return list.get(0).getCustomerId();
+            
+	} catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+	} finally {
+            session.close();
 	}
         
-        //withdraw
-         public Long widthdraw(int accountId,double amount)
-	{
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		Transaction transaction = null;
-		Long courseId = null;
-		try {
-			transaction = session.beginTransaction();
-                        Account account = (Account) session.get(Account.class, accountId);
-			//course.setCourseName(courseName);
-                        //if account exists
-                        if(account != null ){                      
-			   Withdraw withdraw = new Withdraw(account.getId(), account.getCustomerId(), amount);
-			   //customer.setCourseName(courseName);
-			   session.save(account);
-                           account.setAmount(account.getAmount() - withdraw.getAmount());
-                           //update account after withdraw
-			   transaction.commit();
-                        }
-		} catch (HibernateException e) {
-			transaction.rollback();
-			e.printStackTrace();
-		} finally {
-			session.close();
-		}
-		return courseId;
-		
+        return -1;
+    }
+    
+    
+    public static double getAmountfromCustomerID(int cusId) {
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+	Transaction transaction = null;
+        
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from Account where customerId = :customerId ");
+            query.setParameter("customerId", cusId);
+            
+            List<Account> list = query.list();
+            Account account = list.get(0);
+            
+            return list.get(0).getAmount();
+            
+	} catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+	} finally {
+            session.close();
+            
 	}
-         
-
+        
+        return -1;
+        
+    }
+    
+    public static double getAmountWithdrawFromTransactioin(int cardId, Date today) {
+        
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        
+	Transaction transaction = null;
+        
+        try {
+            transaction = session.beginTransaction();
+            Query query = session.createQuery("from Withdraw where cardId = :cardId and day(date) = day(:date) and month(date) = month(:date) and year(date) = year(:date) and type = 'WITHDRAW' ");
+            query.setParameter("cardId", cardId);
+            query.setParameter("date", today);
+            
+            List<Withdraw> list = query.list();
+            
+            if( list == null ) 
+                return 0;
+            
+            double totalAmount = 0;
+            for(int i=0 ; i<list.size() ; i++) { 
+                totalAmount += list.get(i).getAmount();
+            }
+            
+            return totalAmount;
+            
+	} catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+	} finally {
+            session.close();
+            
+	}
+        
+        return -1;
+        
+    }
+    
+    public static Date getTodayDate() {
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date date = new Date();
+        
+        return date;
+    }
+    
 }

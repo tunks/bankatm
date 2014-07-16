@@ -14,15 +14,11 @@
        
         <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" /> 
         <script type="text/javascript" src="javascripts/atm_javascript.js"></script>
-        
+
     </head>
     <body>
         
-        <% String WAmount = (String)request.getAttribute("WAmount"); %>
-        
-        <form id="Withdraw" action="atm_withdraw" method="post">
-            <input type="hidden" id="WAmount" name="WAmount" value="<%=WAmount%>">
-        </form>
+        <% String ValidMessage = (String)request.getAttribute("ValidMessage"); %>
         
         <table class="center">
             <col width="100px" />
@@ -39,7 +35,7 @@
             <tr>
                 <td colspan="4" height="120">
                     <div class="fontStyle-menu">
-                        Confirm withdraw transaction 
+                        Successful
                     </div>
                 </td>
             </tr>
@@ -51,7 +47,7 @@
                 </td>
                 <td colspan="2">
                     <div class="fontStyle-center">
-                        You want to withdraw <%=WAmount%>$ <br> from your account. 
+                        <%=ValidMessage%>
                     </div>
                 </td>
                 <td>
@@ -66,8 +62,13 @@
                         <a href="#" class="button">></a>
                     </div>
                 </td>
-                <td colspan="2">
-                    <div class="fontStyle-center">
+                <td>
+                    <div class="fontStyle-left">
+                        
+                    </div>
+                </td>
+                <td>
+                    <div class="fontStyle-right">
                         
                     </div>
                 </td>
@@ -80,22 +81,22 @@
             <tr>
                 <td>
                     <div>
-                        <a href="#" class="button" onclick="ConfirmWithdraw()">></a>
+                        <a href="atm_transaction" class="button">></a>
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-left">
-                        yes
+                        menu
                     </div>
                 </td>
                 <td>
                     <div class="fontStyle-right">
-                        no, back to menu
+                        log out
                     </div>
                 </td>
                 <td>
                     <div>
-                        <a href="atm/transaction" class="button"><</a>
+                        <a href="atm_logout" class="button"><</a>
                     </div>
                 </td>
             </tr>

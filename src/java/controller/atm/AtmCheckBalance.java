@@ -6,13 +6,21 @@
 
 package controller.atm;
 
+import controller.bank.BankActions;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.classes.Account;
+import model.classes.Card;
+import model.classes.HibernateUtil;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -32,10 +40,26 @@ public class AtmCheckBalance extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/view/atm/AtmCheckBalance.jsp").forward(request, response);   
+        
+        
+        int CardId = 888; //assume
+        int CusId =  AtmActions.getCustomerIDfromCardID(CardId);
+        System.out.println("CusId = "+CusId);
+        double amount =  AtmActions.getAmountfromCustomerID(CusId);
+        System.out.println("amount = "+amount);
+        
+        if(amount != -1) {
+            request.setAttribute("amount", String.valueOf(amount));
+            request.getRequestDispatcher("/WEB-INF/view/atm/AtmCheckBalance.jsp").forward(request, response);   
+        }
+        else {
+            request.setAttribute("InvalidMessage", "Account not found");
+            request.getRequestDispatcher("/WEB-INF/view/atm/AtmWithdrawInvalid.jsp").forward(request, response);
+        }
   
-
     }
+   
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -75,5 +99,6 @@ public class AtmCheckBalance extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

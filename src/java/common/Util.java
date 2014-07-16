@@ -6,7 +6,11 @@
 
 package common;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -52,5 +56,25 @@ public class Util {
       String pattern = Integer.toString(ranNumber) ;
       
       return Integer.parseInt(pattern);
+    }
+    
+    //encryption function
+    public static String encryptData(String data)  {
+        try {
+            String hashdata = null;
+            
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(data.getBytes());
+            byte[] bytes = md.digest();
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bytes.length; i++) {
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            hashdata = sb.toString();
+            return hashdata;
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+            return data;
+        }
     }
 }

@@ -13,8 +13,8 @@
         <title>ATM Transaction</title>
        
         <link rel="stylesheet" href="css/ATM_style.css" media="screen" type="text/css" /> 
+        <script type="text/javascript" src="javascripts/atm_javascript.js"></script>
         
-
     </head>
     <body>
         

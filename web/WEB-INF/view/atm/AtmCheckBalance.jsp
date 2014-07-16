@@ -23,6 +23,8 @@
     </head>
     <body>
         
+        <% String amount = (String)request.getAttribute("amount"); %>
+        
         <table class="center">
             <col width="100px" />
             <col width="250px" />
@@ -48,14 +50,9 @@
                         <a href="#" class="button">></a>
                     </div>
                 </td>
-                <td>
-                    <div class="fontStyle-left">
-                        Amount Money: 
-                    </div>
-                </td>
-                <td>
-                    <div class="fontStyle-right">
-                        
+                <td colspan="2">
+                    <div class="fontStyle-center">
+                        Amount Money: <%=amount%>$
                     </div>
                 </td>
                 <td>

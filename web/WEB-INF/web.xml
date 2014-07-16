@@ -41,6 +41,10 @@
         <servlet-class>controller.atm.AtmWithdrawInvalid</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AtmWithdrawValid</servlet-name>
+        <servlet-class>controller.atm.AtmWithdrawValid</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AtmLogout</servlet-name>
         <servlet-class>controller.atm.AtmLogout</servlet-class>
     </servlet>
@@ -91,6 +95,10 @@
     <servlet-mapping>
         <servlet-name>AtmWithdrawInvalid</servlet-name>
         <url-pattern>/atm_withdraw_invalid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AtmWithdrawValid</servlet-name>
+        <url-pattern>/atm_withdraw_valid</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AtmLogout</servlet-name>
