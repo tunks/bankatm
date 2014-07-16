@@ -43,9 +43,9 @@ public class AtmCheckBalance extends HttpServlet {
         //assume id of card = 888
         int CardId = 888;
        
-        //AtmActions atmAction = new AtmActions();
-        //double amount = atmAction.getAmountfromCustomerID(atmAction.getCustomerIDfromCardID(CardId));
-        double amount = 55;
+        AtmActions atmAction = new AtmActions();
+        double amount = atmAction.getAmountfromCustomerID(atmAction.getCustomerIDfromCardID(CardId));
+        //double amount = 55;
         
         if(amount != -1) {
             request.setAttribute("amount", String.valueOf(amount));
