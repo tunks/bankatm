@@ -15,6 +15,10 @@ import model.classes.Transaction;
  
 public class Deposit extends Transaction {
     private int userId;
+    
+    public Deposit(){
+       super();
+    }
     public Deposit(int accountNo, double amount,int userId) {
         super(accountNo,amount, "Deposit");
         this.userId = userId;

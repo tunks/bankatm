@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.classes.User;
 
 /**
  *
@@ -36,14 +37,33 @@ public class Bank extends HttpServlet {
            response.setContentType("text/html;charset=UTF-8");
 
            HttpSession session = request.getSession();
-           String user = (String)session.getAttribute("user");
-           if ( user != null){
-              List customers = BankActions.listCustomers();
-              if (customers != null){
-                  request.setAttribute("customers",customers);
+           User currentUser = (User)session.getAttribute("current_user");
+           if ( currentUser != null){
+              List accounts = BankActions.listAccounts();
+              List users = BankActions.listUsers();
+              if (accounts != null){
+                  request.setAttribute("accounts",accounts);
                 }
-               session.setAttribute("user", user);
-               request.getRequestDispatcher("/WEB-INF/view/bank/bank.jsp").forward(request, response);             
+              if (users != null){
+                  request.setAttribute("users",users);
+                }
+             
+              //account_list
+               String distination = request.getParameter("dest");
+               if(distination != null){
+                  
+                   switch(distination){
+                       case "account_list":
+                            request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").forward(request, response);
+                           break;
+                       case "user_list":
+                            request.getRequestDispatcher("/WEB-INF/view/bank/user_list.jsp").forward(request, response);
+                           break;
+                           
+                  }             
+                }
+               else
+                   request.getRequestDispatcher("/WEB-INF/view/bank/bank.jsp").forward(request, response);             
              } else{
               request.setAttribute("reference","bank");
               request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
@@ -78,27 +98,25 @@ public class Bank extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          String username = request.getParameter("username");
-        String password = request.getParameter("password");
+         String password = request.getParameter("password");
         //String realPerson = request.getParameter("defaultReal");
-        //String realPersonHash = request.getParameter("defaultRealHash");
-        if(Authenticate.checkBankUser(username,password)) 
-                //Validate.rpHash(realPerson).equals(realPersonHash))
-        {
+        //String realPersonHash = request.getParameter("defaultRealHash")
+         User currentUser = Authenticate.checkBankUser(username,password);
+         if(currentUser != null) 
+           {
             // Return the existing session if there is one. Create a new session otherwise.
-            HttpSession session = request.getSession();
-         
-            session.setAttribute("user",username);
-            
+            HttpSession session = request.getSession();     
+            session.setAttribute("current_user",currentUser);
             //response.sendRedirect("bank");
             processRequest(request, response);
-        }
-        else
-        {
+          }
+          else
+          {
             String errorMsg = "Invalid login crendentials";
             request.setAttribute("errorMsg",errorMsg);
             request.setAttribute("reference","bank");
             request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
-        }
+          }
     }
 
     /**

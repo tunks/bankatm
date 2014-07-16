@@ -9,6 +9,8 @@ package model.classes;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *<Account,Transaction>
@@ -21,6 +23,8 @@ public class Customer implements Serializable{
     private String address;
     private String phone;
     private String email;
+    
+    private Set<Account> accounts = new HashSet<Account>(0);
     
     Customer(){}
     
@@ -79,5 +83,12 @@ public class Customer implements Serializable{
     public void setAddress(String address){
        this.address = address;
     }
+    
+    public Set<Account> getAccounts() {
+      return accounts;
+   }
+   public void setAccounts( Set<Account> accounts ) {
+      this.accounts = accounts;
+   }
     
 }

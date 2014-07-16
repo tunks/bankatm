@@ -7,6 +7,8 @@
 package model.classes;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /**
@@ -18,6 +20,9 @@ public class Card implements Serializable{
     private int customerId;
     private int cardNo;
     private int pinCode;
+    private Set<Account> accounts = new HashSet<Account>(0);
+    
+    public Card(){}
     
     public Card(int customerId, int cardNo, int pinCode){
       this.customerId = customerId;
@@ -55,5 +60,13 @@ public class Card implements Serializable{
     
     public void setCardNo(int cardNo){
         this.cardNo = cardNo;
+    }
+    
+    public Set<Account> getAccounts() {
+      return accounts;
+    }
+    
+     public void setAccounts( Set<Account> accounts ) {
+      this.accounts = accounts;
     }
 }

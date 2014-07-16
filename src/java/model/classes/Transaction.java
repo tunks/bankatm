@@ -18,12 +18,15 @@ public class Transaction implements Serializable{
     protected int accountId;
     protected double amount;
     protected Date date;
-    private String typeOfTransaction;
+    private String type;
     
-    public Transaction(int accountId,double amount , String typeOfTransaction){
+    public Transaction(){
+    
+    }
+    public Transaction(int accountId,double amount , String type){
          this.accountId = accountId;
          this.amount = amount;
-         this.typeOfTransaction = typeOfTransaction;
+         this.type = type;
     }
     
     public int getId(){
@@ -56,5 +59,13 @@ public class Transaction implements Serializable{
     
     public void setDate(Date date){
       this.date = date;
+    }
+    
+    public String getType(){
+      return type;
+    }
+    
+    public void setType(String type){
+      this.type = type;
     }
 }

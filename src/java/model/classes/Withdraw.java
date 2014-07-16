@@ -11,7 +11,12 @@ package model.classes;
  * @author ebrima
  */
 public class Withdraw extends Transaction {
-    private int cardId;
+    private int cardId; 
+    
+    public Withdraw(){
+    
+    }
+    
     public Withdraw(int accountNo, int cardId, double amount) {
         super(accountNo,amount,"Withdraw");
         this.cardId = cardId;

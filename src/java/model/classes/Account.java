@@ -18,10 +18,14 @@ public class Account implements Serializable {
     private int id;
     private int accountNo;
     private int customerId;
+    private int cardId;
     private String accountType;
     private Date dateCreated;
     private double amount;
-    
+    private Customer customer;
+            
+    public Account(){
+    }
     public Account(String accountType, double amount){
        this.accountType = accountType;
        this.amount = amount;
@@ -39,6 +43,14 @@ public class Account implements Serializable {
     
     public void setId(int id){
       this.id = id;
+    }
+    
+    public int getCardId(){
+       return cardId;
+    }
+    
+    public void setCardId(int cardId){
+      this.cardId = cardId;
     }
     
     public int getAccountNo(){
@@ -79,5 +91,13 @@ public class Account implements Serializable {
     
     public void setDateCreated(Date date){
         dateCreated = date;
+    }
+    
+    public Customer getCustomer(){
+      return customer;
+    }
+    
+    public void setCustomer(Customer customer){
+      this.customer = customer;
     }
 }

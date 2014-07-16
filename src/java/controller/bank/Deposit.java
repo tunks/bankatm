@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.classes.User;
 
 /**
  *
@@ -24,8 +25,8 @@ public class Deposit extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("user");
-        if (user != null) {
+        User currentUser = (User) session.getAttribute("current_user");
+        if(currentUser != null){
             request.getRequestDispatcher("/WEB-INF/view/bank/deposit.jsp").forward(request, response);
         } else {
             //request.setAttribute("reference", "bank");

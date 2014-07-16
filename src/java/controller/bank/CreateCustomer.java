@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.classes.User;
 
 /**
  *
@@ -41,8 +42,8 @@ public class CreateCustomer extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         HttpSession session = request.getSession();
-        String user = (String) session.getAttribute("user");
-        if (user != null) {
+        User currentUser = (User) session.getAttribute("current_user");
+        if (currentUser != null) {
             request.getRequestDispatcher("/WEB-INF/view/bank/createcustomer.jsp").forward(request, response);
         } else {
             //request.setAttribute("reference", "bank");
@@ -70,30 +71,42 @@ public class CreateCustomer extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-
-        String firstName = request.getParameter("firstname");
-        String lastName = request.getParameter("lastname");
-        String address = request.getParameter("address");
-        String email = request.getParameter("email");
-        String phone = request.getParameter("phone");
-        String accountType = request.getParameter("accountType");
-        double openningAmount = 100;//Double.parseDouble(request.getParameter("openningAmount"));
-        try {
-            if (BankActions.createCustomer(firstName, lastName, address, email, phone, accountType, openningAmount)) {
-                List customers = BankActions.listCustomers();
-                request.setAttribute("customers", customers);
-                out.println("<div class=\"alert alert-success\">Successfully saved</div>");
-                request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").include(request, response);
-            } else {
+        //get the session
+        HttpSession session = request.getSession();
+        User currentUser = (User) session.getAttribute("current_user");
+        if(currentUser != null){
+            String firstName = request.getParameter("firstname");
+            String lastName = request.getParameter("lastname");
+            String address = request.getParameter("address");
+            String email = request.getParameter("email");
+            String phone = request.getParameter("phone");
+            String accountType = request.getParameter("accountType");
+            double openningAmount = Double.parseDouble(request.getParameter("openinngAmount"));
+            boolean createAtmCard = Boolean.parseBoolean(request.getParameter("atmCard"));
+         
+            try {
+                if (BankActions.createCustomer(firstName, lastName, address, email, phone, accountType, openningAmount,createAtmCard,currentUser.getId())) {
+                    List accounts = BankActions.listAccounts();
+                    if(accounts != null)
+                      request.setAttribute("accounts", accounts);
+                    out.println("<div class=\"alert alert-success\">Successfully saved</div>");
+                    request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").include(request, response);
+                } else {
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    out.println("Error data not saved");
+                    out.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
                 response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-                out.println("Error data not saved");
+                out.println("Error saving data");
                 out.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-            out.println("Error saving data");
-            out.close();
+        
+        }else{
+           response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+           out.println("Session is expired");
+           out.close();
         }
     }
 

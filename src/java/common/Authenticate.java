@@ -12,6 +12,7 @@ package common;
  */
 import com.mysql.jdbc.Driver;
 import java.sql.*;
+import model.classes.Card;
 import model.classes.HibernateUtil;
 import model.classes.User;
 import org.hibernate.HibernateException;
@@ -22,53 +23,27 @@ import org.hibernate.Transaction;
 public class Authenticate
  {
  
-     public static boolean checkATMUser(String cardNumber,String pinCode) 
+     public static Card checkATMCard(int cardNo, int pinCode) 
      {
-      boolean st =false;
         Session session = HibernateUtil.getSessionFactory().openSession();
       //Transaction transaction = null;
       try {
         //    Transaction tx = session.beginTransaction();
-            String hql = "from User as u where u.username = :username and u.password = :password";
+            String hql = "from Card as u where u.cardNo = :cardno and u.pinCode = :pincode";
             Query q = session.createQuery(hql);
-            q.setString("username",cardNumber);
-            q.setString("password", pinCode);
-            User user = (User) q.uniqueResult();
-            st = (user != null);
-            if(st)
-             System.out.println("\n\n logged in Added \n");
+            q.setInteger("cardno", cardNo);
+            q.setInteger("pincode", pinCode);
+            Card card = (Card) q.uniqueResult();
+            return card;
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             System.out.println("error");
         }
-         return st;                 
+         return null;                 
   }   
      
-   public static boolean checkBankUser(String username,String password) 
+   public static User checkBankUser(String username,String password) 
      {
-      boolean st =false;
-      /*try{
-       
-	   //loading driver 
-           Class.forName("com.mysql.jdbc.Driver");
-                 
-           //creating connection with the database</b></font> 
-           Connection con=DriverManager.getConnection
-                        ("jdbc:mysql://localhost:3306/bank_atm_db","root","");
-           PreparedStatement ps =con.prepareStatement
-                             ("select * from user where username=? and password=?");
-           ps.setString(1, username);
-           ps.setString(2, password);
-           ResultSet rs =ps.executeQuery();
-           st = rs.next();
-           //System.out.println(st);
-        
-        //return (cardNo.equals("user") && pinCode.equals("user") );
-      }catch(Exception e)
-      {
-          e.printStackTrace();
-      }
-      */
       Session session = HibernateUtil.getSessionFactory().openSession();
       //Transaction transaction = null;
       try {
@@ -79,14 +54,12 @@ public class Authenticate
             q.setString("username", username);
             q.setString("password", password);
             User user = (User) q.uniqueResult();
-            st = (user != null);
-            if(st)
-             System.out.println("\n\n logged in Added \n");
+            return user;
         } catch (HibernateException e) {
             System.out.println(e.getMessage());
             System.out.println("error");
         }
-         return st;                 
+         return null;                 
   }   
      
   	/**

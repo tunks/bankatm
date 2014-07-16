@@ -8,7 +8,13 @@
         <id name="id" type="int" column="id">
             <generator class="native"/>
         </id>
-        <property name="username" type="string" column="username" not-null="true"/>
-        <property name="password" type="string" column="password" not-null="true"/>
+        <set name="roles" cascade="all">
+            <key column="user_id"/>
+            <one-to-many class="model.classes.UserRole"/>
+        </set>
+        <property name="username" type="string" column="username" />
+        <property name="password" type="string" column="password"/>
+        <property name="firstName" type="string" column="first_name" />
+        <property name="lastName" type="string" column="last_name" />
     </class>
 </hibernate-mapping>

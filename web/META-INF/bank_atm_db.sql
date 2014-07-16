@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `customer_id` int(11) NOT NULL,
   `account_no` int(11) NOT NULL,
   `account_type` varchar(45) NOT NULL,
-  `date_created` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_created` timestamp DEFAULT CURRENT_TIMESTAMP,
   `balance` double DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -42,8 +42,8 @@ CREATE TABLE IF NOT EXISTS `accounts` (
 -- Dumping data for table `accounts`
 --
 
-INSERT INTO `accounts` (`id`, `customer_id`, `account_no`, `account_type`, `date_created`, `balance`) VALUES
-(1, 19, 0, 'Savings', NULL, 100);
+INSERT INTO `accounts` (`id`, `customer_id`, `account_no`, `account_type`,  `balance`) VALUES
+(1, 19, 0, 'Savings', 100);
 
 -- --------------------------------------------------------
 

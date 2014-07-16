@@ -6,6 +6,8 @@
 
 package model.classes;
 
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,7 +25,24 @@ public class User {
     private  int id;
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
+    private Set<UserRole> roles = new HashSet<UserRole>(0);
+   
+    public User(){}
     
+    public User(String username,String password){
+      this.username = username;
+      this.password = password;
+    }
+    
+    public User(String username,String password, String firstName, String lastName){
+      this.username = username;
+      this.password = password;
+      this.firstName = firstName;
+      this.lastName = lastName;
+    }
+
     public int getId(){
      return id;
     }
@@ -48,4 +67,27 @@ public class User {
      return password;
     }
     
+    public String getFirstName(){
+      return firstName;
+    }
+    
+    public void setFirstName(String firstName){
+        this.firstName = firstName;
+    }
+    
+    public String getLastName(){
+      return lastName;
+    }
+    
+    public void setLastName(String lastName){
+        this.lastName = lastName;
+    }
+    
+    public Set<UserRole> getRoles() {
+      return roles;
+    }
+    
+    public void setRoles( Set<UserRole> roles ) {
+      this.roles = roles;
+    }
 }

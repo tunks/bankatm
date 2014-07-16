@@ -25,7 +25,7 @@
     <table class="table table-striped table-hover">
         <tr>
             <th>Acc No.</th>
-            <th>Balance</th>
+            <th>Transaction</th>
             <th>Customer</th>
         </tr>
      <%
