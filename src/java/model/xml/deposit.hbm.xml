@@ -14,3 +14,4 @@
         <property name="type" type="string" column="type" />
         <property name="amount" type="double" column="amount" not-null="true"/>
   </class>
+</hibernate-mapping>
