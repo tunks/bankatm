@@ -7,9 +7,12 @@
 package controller.atm;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.classes.Account;
 import model.classes.Card;
 import model.classes.HibernateUtil;
@@ -88,7 +91,7 @@ public class AtmActions {
         
         try {
             transaction = session.beginTransaction();
-            Query query = session.createQuery("from Withdraw where cardId = :cardId and day(date) = day(:date) and month(date) = month(:date) and year(date) = year(:date) and type = 'WITHDRAW' ");
+            Query query = session.createQuery("from Withdraw where cardId = :cardId and type = 'WITHDRAW' and date > :date ");
             query.setParameter("cardId", cardId);
             query.setParameter("date", today);
             
@@ -101,6 +104,8 @@ public class AtmActions {
             for(int i=0 ; i<list.size() ; i++) { 
                 totalAmount += list.get(i).getAmount();
             }
+            
+            System.out.println("totalAmount = "+totalAmount);
             
             return totalAmount;
             
@@ -117,10 +122,16 @@ public class AtmActions {
     }
     
     public static Date getTodayDate() {
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        Date date = new Date();
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+        Date today = new Date();
+        Date todayWithZeroTime = null;
+        try {
+            todayWithZeroTime = formatter.parse(formatter.format(today));
+        } catch (ParseException ex) {
+            Logger.getLogger(AtmActions.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
-        return date;
+        return todayWithZeroTime;
     }
     
 }
