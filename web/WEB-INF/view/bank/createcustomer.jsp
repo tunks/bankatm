@@ -18,6 +18,7 @@
     </head>
     <body>
         <div class="create-customer-form-container">
+            <div id="createCustomerErrorMsg"></div>
             <form action="bank/createcustomer" method="post" role="form" id="createCustomer"><br>
                 <fieldset><legend>Create Customer Profile</legend>
                     <table
@@ -31,21 +32,22 @@
                 </fieldset>
                 <fieldset><legend>Enter Account Information</legend>
                     <table>
-                    <tr><td>Account Number:</td><td> <input type="text" name="accountno" /></td></tr>
-                    <tr><td>Account Type:</td><td> <input type="text" name="accountType" /></td></tr>
-                    <tr><td>Initial Amount:</td><td><input type="text" name="openinngAmount" /></td></tr>
+
+                        <tr><td>Account Type:<input type="radio" name="accountType" value="Saving"/></td><td>Saving
+                        <input type="radio" name="accountType" value="Checking" />Checking</td></tr>
+                        <tr><td>Initial Amount:</td><td><input type="text" name="openinngAmount" /></td></tr>
                     </table>
-                  
+
                     <table>                       
-                    <tr><td> <input type="radio" name="atmCard" value="true"/></td><td>ATM Card</td></tr>
-                    <tr><td> <input type="radio" name="atmCard"value="false"/></td><td>No ATM Card</td></tr>
+                        <tr><td> <input type="radio" name="atmCard" value="true"/></td><td>ATM Card</td></tr>
+                        <tr><td> <input type="radio" name="atmCard"value="false"/></td><td>No ATM Card</td></tr>
                     </table>
                 </fieldset>
                 <table>
 
-                    
-                <tr><td><button type="submit" class="btn btn-primary">Save</button></td>
-                <td><button type="button" class="btn btn-primary" id="closeCustomerForm">Cancel</button></td></tr>
+
+                    <tr><td><button type="submit" class="btn btn-primary">Save</button></td>
+                        <td><button type="button" class="btn btn-primary" id="closeCustomerForm">Cancel</button></td></tr>
                 </table>
             </form>
 
