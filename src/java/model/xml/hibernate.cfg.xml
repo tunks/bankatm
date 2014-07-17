@@ -10,14 +10,12 @@
     <property name="hibernate.current_session_context_class">thread</property>
     <mapping resource="model/xml/user.hbm.xml"/>
     <mapping resource="model/xml/userRole.hbm.xml"/>
-    
     <mapping resource="model/xml/customer.hbm.xml"/>
     <mapping resource="model/xml/account.hbm.xml"/>
-
     <mapping resource="model/xml/card.hbm.xml"/>
-
-     <mapping resource="model/xml/withdraw.hbm.xml"/>
-     <mapping resource="model/xml/deposit.hbm.xml"/>
-
+    <mapping resource="model/xml/withdraw.hbm.xml"/>
+    <mapping resource="model/xml/deposit.hbm.xml"/>
+    <mapping resource="model/xml/cardsession.hbm.xml"/>
+    <mapping resource="model/xml/usersession.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

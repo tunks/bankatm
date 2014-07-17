@@ -1,8 +1,4 @@
-<%-- 
-    Document   : bank_login
-    Created on : Jul 13, 2014, 7:45:24 PM
-    Author     : ebrima
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

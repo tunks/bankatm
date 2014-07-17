@@ -7,6 +7,7 @@ package controller.bank;
  */
 
 import common.Authenticate;
+import common.SessionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -35,7 +36,7 @@ public class Bank extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
            response.setContentType("text/html;charset=UTF-8");
-
+         
            HttpSession session = request.getSession();
            User currentUser = (User)session.getAttribute("current_user");
            if ( currentUser != null){
@@ -66,6 +67,7 @@ public class Bank extends HttpServlet {
                    request.getRequestDispatcher("/WEB-INF/view/bank/bank.jsp").forward(request, response);             
              } else{
               request.setAttribute("reference","bank");
+              request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
               request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
              }  
         
@@ -97,26 +99,44 @@ public class Bank extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         String username = request.getParameter("username");
-         String password = request.getParameter("password");
-        //String realPerson = request.getParameter("defaultReal");
-        //String realPersonHash = request.getParameter("defaultRealHash")
-         User currentUser = Authenticate.checkBankUser(username,password);
-         if(currentUser != null) 
-           {
-            // Return the existing session if there is one. Create a new session otherwise.
-            HttpSession session = request.getSession();     
-            session.setAttribute("current_user",currentUser);
-            //response.sendRedirect("bank");
-            processRequest(request, response);
-          }
-          else
+        //first validate the captcha text to make sure that a human is posting
+         String realPerson = request.getParameter("realPerson"),
+                realPersonHash = request.getParameter("realPersonHash"),
+                salt =  Authenticate.generateRealPersonSalt();
+         if(Authenticate.validateRealPerson(realPerson,realPersonHash , salt))
           {
-            String errorMsg = "Invalid login crendentials";
+                String username = request.getParameter("username");
+                String password = request.getParameter("password");
+               //String realPerson = request.getParameter("defaultReal");
+               //String realPersonHash = request.getParameter("defaultRealHash")
+                User currentUser = Authenticate.checkBankUser(username,password);
+                if(currentUser != null) 
+                  {
+                   // Return the existing session if there is one. Create a new session otherwise.
+                   HttpSession session = request.getSession();     
+                   session.setAttribute("current_user",currentUser);
+                //   session.getServletContext().;
+                   //save the session into the database
+                   System.out.println("session id"+session.getId());
+                   SessionManager.addUserSession(currentUser.getId(), session);
+                   processRequest(request, response);
+                 }
+                 else
+                 {
+                   String errorMsg = "Invalid login crendentials";
+                   request.setAttribute("errorMsg",errorMsg);
+                   request.setAttribute("reference","bank");
+                   request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
+                   request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
+                 }
+          }
+         else{
+            String errorMsg = "Invalid login crendentials,captcha not correct";
             request.setAttribute("errorMsg",errorMsg);
             request.setAttribute("reference","bank");
+            request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
             request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
-          }
+         }
     }
 
     /**

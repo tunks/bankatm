@@ -43,6 +43,7 @@ public class Atm extends HttpServlet {
               request.getRequestDispatcher("/WEB-INF/view/atm/atm.jsp").forward(request, response);             
             else{
               request.setAttribute("reference","atm");
+              request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
               request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
              }  
     }
@@ -98,6 +99,7 @@ public class Atm extends HttpServlet {
                 String errorMsg = "Invalid login crendentials";
                 request.setAttribute("errorMsg",errorMsg);
                 request.setAttribute("reference","atm");
+                request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
                 request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
             }
     }

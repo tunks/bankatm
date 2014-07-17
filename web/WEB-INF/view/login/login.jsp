@@ -24,6 +24,9 @@
         <% if (reference == null) {  %>
           <script src="vendor/bootstrap-3.1.1/js/tab.js"></script>
          <% } %>
+         <script>
+          $salt = <%=(String)request.getAttribute("realPersonSalt")  %> 
+        </script>
         <script type="text/javascript" src="vendor/jquery/realperson/jquery.plugin.js"></script> 
         <script type="text/javascript" src="vendor/jquery/realperson/jquery.realperson.js"></script>
         <script type="text/javascript" src="javascripts/webapp.js"></script>

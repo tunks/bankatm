@@ -52,7 +52,7 @@ public class Authenticate
             String hql = "from User as u where u.username = :username and u.password = :password";
             Query q = session.createQuery(hql);
             q.setString("username", username);
-            q.setString("password", password);
+            q.setString("password",Util.encryptData(password));
             User user = (User) q.uniqueResult();
             return user;
         } catch (HibernateException e) {
@@ -69,12 +69,30 @@ public class Authenticate
 	 * @return  its hash value
 	 */
 	
-    public static  String rpHash(String value) {
+     //validate the captacha
+     public static boolean validateRealPerson(String realPerson,String realPersonHash,String salt)
+     {
+         if( (realPersonHash != null) && (realPerson != null)){
+             return realPersonHash(realPerson).equals(realPersonHash);
+         }
+         else{
+             System.out.println("InValid real person");
+             return false;
+         }
+     }
+     
+     //generate salt for realPerson captacha
+     public static String generateRealPersonSalt(){
+      return "23334";
+     }
+     
+     private static String realPersonHash(String value) {
 		int hash = 5381;
 		value = value.toUpperCase();
 		for(int i = 0; i < value.length(); i++) {
 			hash = ((hash << 5) + hash) + value.charAt(i);
 		}
+                System.out.println("real person hash method: "+String.valueOf(hash));
 		return String.valueOf(hash);
 	}
     

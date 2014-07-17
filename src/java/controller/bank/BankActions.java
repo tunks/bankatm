@@ -266,7 +266,7 @@ public class BankActions {
 		try {
 			transaction = session.beginTransaction();
                         String encryptedPassword = Util.encryptData(password);
-			User user = new User(username, password,firstName,lastName);
+			User user = new User(username,encryptedPassword,firstName,lastName);
 		        int userId = (Integer) session.save(user);
 			transaction.commit();
                         save = addUserRole(userId,role);
