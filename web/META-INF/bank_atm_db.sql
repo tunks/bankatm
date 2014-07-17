@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 16, 2014 at 10:47 PM
+-- Generation Time: Jul 17, 2014 at 03:50 PM
 -- Server version: 5.5.37
 -- PHP Version: 5.3.10-1ubuntu3.12
 
@@ -116,13 +116,26 @@ INSERT INTO `customers` (`id`, `first_name`, `last_name`, `address`, `phone`, `g
 --
 
 CREATE TABLE IF NOT EXISTS `sessions` (
-  `id` int(11) NOT NULL DEFAULT '0',
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `customer_id` int(11) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
+  `timestamp` bigint(20) DEFAULT NULL,
   `session` longtext,
+  `card_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `sessions`
+--
+
+INSERT INTO `sessions` (`id`, `user_id`, `customer_id`, `timestamp`, `session`, `card_id`) VALUES
+(1, 14, NULL, 1405602802029, NULL, NULL),
+(2, 14, NULL, 1405602980754, NULL, NULL),
+(3, 14, NULL, 1405602980754, '98C4A2E129C626330B82401A1C34C51E', NULL),
+(4, 14, NULL, 1405603604101, '3BFF705B4EACF7B747702EEC9B19A6CD', NULL),
+(5, 14, NULL, 1405603656957, '00B77A5C91E89A346A0BDD95BCC9D3EE', NULL),
+(6, 14, NULL, 1405606472697, '485CD9CE17909CD80F90D44FECAADED5', NULL);
 
 -- --------------------------------------------------------
 
@@ -161,7 +174,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `users`
@@ -171,7 +184,11 @@ INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `last_name`) VA
 (1, 'admin', 'admin1', 'John', 'Mendy'),
 (8, 'Ebrima', 'Tunkara', 'eTunkara', 'tunkara'),
 (9, 'tunk1', 'tunkara', 'Ebrima ', 'Tunkara'),
-(10, 'admin2', 'test1', 'Firdus', 'Hassan');
+(10, 'admin2', 'test1', 'Firdus', 'Hassan'),
+(11, 'kjohnson', 'kjohnson1', 'Kene', 'Johnson'),
+(12, 'bkofi', '6b602032941b36e0ecbe074e6aac35ce', 'Ben', 'Kofi'),
+(13, 'admin3', '21232f297a57a5a743894a0e4a801fc3', 'Ebrima', 'Tunkara'),
+(14, 'admin4', 'fc1ebc848e31e0a68e868432225e3c82', 'Ebrima', 'Tunkara');
 
 -- --------------------------------------------------------
 
@@ -184,7 +201,7 @@ CREATE TABLE IF NOT EXISTS `user_roles` (
   `user_id` int(11) NOT NULL,
   `role` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
 
 --
 -- Dumping data for table `user_roles`
@@ -194,7 +211,11 @@ INSERT INTO `user_roles` (`id`, `user_id`, `role`) VALUES
 (1, 7, 'administrator'),
 (2, 8, 'administrator'),
 (3, 9, 'account manager'),
-(4, 10, 'administrator');
+(4, 10, 'administrator'),
+(5, 11, 'administrator'),
+(6, 12, 'administrator'),
+(7, 13, 'administrator'),
+(8, 14, 'administrator');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
