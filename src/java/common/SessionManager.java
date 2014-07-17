@@ -6,7 +6,9 @@
 
 package common;
 
+import java.util.Hashtable;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import model.classes.CardSession;
 import model.classes.Customer;
 import model.classes.HibernateUtil;
@@ -14,12 +16,12 @@ import model.classes.UserSession;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import javax.servlet.http.HttpSession;
 /**
  *
  * @author ebrima
  */
 public class SessionManager {
+    private static  Hashtable activeSessions = new Hashtable(); 
     public static  boolean addCardSession(int cardId, int customerId , String ses, long timestamp){
         
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -51,6 +53,7 @@ public class SessionManager {
 		        session.save(userSession);
 			transaction.commit();
                         save = true;
+                        activeSessions.put(userId, httpSession);
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();

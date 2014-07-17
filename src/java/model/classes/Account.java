@@ -31,6 +31,11 @@ public class Account implements Serializable {
        this.amount = amount;
     }
     
+     public Account(int customerId, String accountType){
+       this.customerId = customerId;
+       this.accountType = accountType;
+     }
+     
      public Account(int customerId, String accountType, double amount){
        this.customerId = customerId;
        this.accountType = accountType;

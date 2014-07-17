@@ -139,7 +139,7 @@ public class BankActions {
 		boolean save = false;
 		try {
 			transaction = session.beginTransaction();
-			Account account = new Account(customerId,accountType,openningAmount);
+			Account account = new Account(customerId,accountType);
 			account.setAccountNo(Util.generateAccountNumber());
 		        int accountId = (int)session.save(account);
 			transaction.commit();
