@@ -22,12 +22,6 @@ jQuery( document ).ready(function( $ ) {
     
   //post customer account
    $("form#createCustomer" ).submit(function( event ) {
-      /*if ( $( "input:first" ).val() === "correct" ) {
-        $( "span" ).text( "Validated..." ).show();
-        return;
-        }
-        $( "span" ).text( "Not valid!" ).show().fadeOut( 1000 );
-        */
            event.preventDefault();
            var $form = $( this ),
             url = $form.attr( "action" );
@@ -109,24 +103,12 @@ jQuery( document ).ready(function( $ ) {
           return false; 
     });
     
-     /*$(".logout").click(function(event) {
-         event.preventDefault();
-         var url =  $(this).attr('href');
-         //$.load()
-         //$.get( url, function( data ) {
-           // $( "#atm-main-container" ).load(url);
-          //});
-          $.post(url,function(data,status){
-              //alert("Data: " + data + "\nStatus: " + status);
-            });
-            
-          return false; 
-    });*/
-    
-   
-   
 //captacha
-$("#atmRealPerson").realperson({length: 5, hashName: 'realPersonHash',});
-$("#bankRealPerson").realperson({length: 5, hashName: 'realPersonHash',});
+if($("#atmRealPerson").length){
+    $("#atmRealPerson").realperson({length: 5, hashName: 'realPersonHash',});
+   }
+   
+ if( $("#bankRealPerson").length){
+     $("#bankRealPerson").realperson({length: 5, hashName: 'realPersonHash',});}
 
 });

@@ -112,13 +112,7 @@ public class Bank extends HttpServlet {
                 User currentUser = Authenticate.checkBankUser(username,password);
                 if(currentUser != null) 
                   {
-                   // Return the existing session if there is one. Create a new session otherwise.
-                   HttpSession session = request.getSession();     
-                   session.setAttribute("current_user",currentUser);
-                //   session.getServletContext().;
-                   //save the session into the database
-                   System.out.println("session id"+session.getId());
-                   SessionManager.addUserSession(currentUser.getId(), session);
+                   setSingleUserSession(request,response,currentUser);
                    processRequest(request, response);
                  }
                  else
@@ -131,7 +125,7 @@ public class Bank extends HttpServlet {
                  }
           }
          else{
-            String errorMsg = "Invalid login crendentials,captcha not correct";
+            String errorMsg = "Invalid login crendentials<br />Captcha not correct";
             request.setAttribute("errorMsg",errorMsg);
             request.setAttribute("reference","bank");
             request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
@@ -149,4 +143,15 @@ public class Bank extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    void setSingleUserSession(HttpServletRequest request, HttpServletResponse response,User currentUser){
+         HttpSession session;
+         session = SessionManager.getUserSession(currentUser.getId());
+         if(session != null){
+           session.invalidate();
+          }
+          session  = request.getSession();     
+          session.setAttribute("current_user",currentUser);
+        //save the session into the database
+          SessionManager.addUserSession(currentUser.getId(), session);
+    }
 }

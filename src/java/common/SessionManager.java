@@ -9,6 +9,7 @@ package common;
 import java.util.Hashtable;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+import model.classes.Card;
 import model.classes.CardSession;
 import model.classes.Customer;
 import model.classes.HibernateUtil;
@@ -21,18 +22,20 @@ import org.hibernate.Transaction;
  * @author ebrima
  */
 public class SessionManager {
-    private static  Hashtable activeSessions = new Hashtable(); 
-    public static  boolean addCardSession(int cardId, int customerId , String ses, long timestamp){
-        
+    private static  Hashtable activeUserSessions = new Hashtable(); 
+    private static  Hashtable activeCardSessions = new Hashtable();
+    
+    public static  boolean addCardSession(Card card,  HttpSession httpSession){    
         Session session = HibernateUtil.getSessionFactory().openSession();
 		Transaction transaction = null;
                 boolean save = false;
 		try {
                     
                         transaction = session.beginTransaction();
-			CardSession cardSession = new CardSession(cardId,customerId,ses,timestamp);
+			CardSession cardSession = new CardSession(card.getId(),card.getCustomerId(),httpSession.getId(),httpSession.getCreationTime());
 		        session.save(cardSession);
 			transaction.commit();
+                        activeCardSessions.put(card.getId(), httpSession);
                         save = true;
 		} catch (HibernateException e) {
 			transaction.rollback();
@@ -53,7 +56,7 @@ public class SessionManager {
 		        session.save(userSession);
 			transaction.commit();
                         save = true;
-                        activeSessions.put(userId, httpSession);
+                        activeUserSessions.put(userId, httpSession);
 		} catch (HibernateException e) {
 			transaction.rollback();
 			e.printStackTrace();
@@ -62,4 +65,12 @@ public class SessionManager {
 		}
                 return save;
 	}
+     
+      public static HttpSession getUserSession(int userId){
+          return (HttpSession)activeUserSessions.get(userId);       
+      }
+       
+      public static HttpSession getCardSession(int cardId){
+          return (HttpSession)activeCardSessions.get(cardId);       
+      }
 }

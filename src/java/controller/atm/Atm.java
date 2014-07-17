@@ -7,6 +7,7 @@
 package controller.atm;
 
 import common.Authenticate;
+import common.SessionManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -74,34 +75,36 @@ public class Atm extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         int cardNo = Integer.parseInt(request.getParameter("cardNumber"));
-         int pinCode = Integer.parseInt(request.getParameter("pinCode"));
-            //String realPerson = request.getParameter("defaultReal");
-            //String realPersonHash = request.getParameter("defaultRealHash");
-            //TODO -- validate the captcha
-            Card currentCard = Authenticate.checkATMCard(cardNo,pinCode);
-            if(currentCard != null) 
-            {
-                // Return the existing session if there is one. Create a new session otherwise.
-                HttpSession session = request.getSession();
-                session.setAttribute("current_card",currentCard);
-               // session.setAttribute("user", "Pankaj");
-                //setting session to expiry in 30 mins
-                session.setMaxInactiveInterval(30*60);
-                Cookie userName = new Cookie("user", Integer.toString(cardNo));
-                userName.setMaxAge(30*60);
-                response.addCookie(userName);
-
-                processRequest(request, response);
-            }
-            else
-            {
-                String errorMsg = "Invalid login crendentials";
+         //first validate the captcha text to make sure that a human is posting
+          String realPerson = request.getParameter("atmRealPerson"),
+                realPersonHash = request.getParameter("realPersonHash"),
+                salt =  Authenticate.generateRealPersonSalt();
+          if(Authenticate.validateRealPerson(realPerson,realPersonHash , salt))
+          {
+              int cardNo = Integer.parseInt(request.getParameter("cardNumber"));
+               int pinCode = Integer.parseInt(request.getParameter("pinCode"));
+               Card currentCard = Authenticate.checkATMCard(cardNo,pinCode);
+                if(currentCard != null) 
+                {
+                    setSingleCardSession(request,response,currentCard);
+                    processRequest(request, response);
+                }
+                else
+                {
+                    String errorMsg = "Invalid login crendentials";
+                    request.setAttribute("errorMsg",errorMsg);
+                    request.setAttribute("reference","atm");
+                    request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
+                    request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
+                }
+           }
+           else{
+               String errorMsg = "Invalid login crendentials<br />Captcha not correct";
                 request.setAttribute("errorMsg",errorMsg);
                 request.setAttribute("reference","atm");
                 request.setAttribute("realPersonSalt",Authenticate.generateRealPersonSalt());
                 request.getRequestDispatcher("/WEB-INF/view/login/login.jsp").forward(request, response);
-            }
+           }
     }
 
     /**
@@ -114,4 +117,20 @@ public class Atm extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+     void setSingleCardSession(HttpServletRequest request, HttpServletResponse response,Card currentCard){
+                         // Return the existing session if there is one. Create a new session otherwise.
+                HttpSession session = SessionManager.getCardSession(currentCard.getId());
+                if(session != null){
+                   session.invalidate();
+                 }
+                session = request.getSession();
+                session.setAttribute("current_card",currentCard);
+               // session.setAttribute("user", "Pankaj");
+                //setting session to expiry in 30 mins
+                session.setMaxInactiveInterval(30*60);
+                Cookie userName = new Cookie("user", Integer.toString(currentCard.getCardNo()));
+                userName.setMaxAge(30*60);
+                response.addCookie(userName);
+                SessionManager.addCardSession(currentCard, session);
+     }
 }
