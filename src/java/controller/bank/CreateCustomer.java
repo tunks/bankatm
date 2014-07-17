@@ -74,21 +74,27 @@ public class CreateCustomer extends HttpServlet {
         //get the session
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("current_user");
-        if(currentUser != null){
+        if (currentUser != null) {
             String firstName = request.getParameter("firstname");
             String lastName = request.getParameter("lastname");
             String address = request.getParameter("address");
-            String email = request.getParameter("email");
+            String email = request.getParameter("email");            
             String phone = request.getParameter("phone");
             String accountType = request.getParameter("accountType");
             double openningAmount = Double.parseDouble(request.getParameter("openinngAmount"));
             boolean createAtmCard = Boolean.parseBoolean(request.getParameter("atmCard"));
-         
+
             try {
-                if (BankActions.createCustomer(firstName, lastName, address, email, phone, accountType, openningAmount,createAtmCard,currentUser.getId())) {
+                if(!validateEmail(email)){                
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                    out.println("Error Invaild Email Address");
+                    out.close();
+                }
+                else if (BankActions.createCustomer(firstName, lastName, address, email, phone, accountType, openningAmount, createAtmCard, currentUser.getId())) {
                     List accounts = BankActions.listAccounts();
-                    if(accounts != null)
-                      request.setAttribute("accounts", accounts);
+                    if (accounts != null) {
+                        request.setAttribute("accounts", accounts);
+                    }
                     out.println("<div class=\"alert alert-success\">Successfully saved</div>");
                     request.getRequestDispatcher("/WEB-INF/view/bank/account_list.jsp").include(request, response);
                 } else {
@@ -102,11 +108,11 @@ public class CreateCustomer extends HttpServlet {
                 out.println("Error saving data");
                 out.close();
             }
-        
-        }else{
-           response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-           out.println("Session is expired");
-           out.close();
+
+        } else {
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            out.println("Session is expired");
+            out.close();
         }
     }
 
@@ -115,4 +121,28 @@ public class CreateCustomer extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    public boolean validateEmail(String email)  {        
+        Boolean b=false;      
+            String emailreg = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+            b = email.matches(emailreg);   
+            System.out.println(b);
+      
+        return b;
+    }
+     public boolean validatePhone(String phone)  {        
+        Boolean b=false;      
+            String phonereg = "\\d{10}$";
+            b = phone.matches(phonereg);   
+            System.out.println(b);
+      
+        return b;
+    }
+     public boolean validateOpenningAmount(String amount)  {        
+        Boolean b=false;      
+            String amountreg = "\\d";
+            b = amount.matches(amountreg);   
+            System.out.println(b);
+      
+        return b;
+    }
 }

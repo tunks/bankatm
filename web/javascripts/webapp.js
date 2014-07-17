@@ -43,7 +43,7 @@ jQuery( document ).ready(function( $ ) {
                       $( "#bankAccountsBank" ).html( data );
                     },
                     error:function(error){
-                        console.log(error);
+                     $( "#createCustomerErrorMsg" ).html( error );
                     }
                     
                 });
